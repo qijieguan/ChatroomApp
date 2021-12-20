@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from "react-modal";
-import {FaTimes} from 'react-icons/fa';
+import { AiFillCloseSquare } from 'react-icons/ai';
 import axios from 'axios';
 import Topic from './Topic.js';
 
@@ -21,14 +21,21 @@ const Page = (props) => {
         }
     };
 
+    const [onload, setLoad] = useState(true)
     const [topics, setTopics] = useState([]);
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
     const [message, setMessage] = useState("");
     const [modal, setModal] = useState(false);
-
+    
     useEffect(() => {
-        axios.post('/api/load_topic', {
+        if (onload) {
+            const nav = document.querySelector(".page-features");
+            nav.classList.toggle("transformX");
+            setLoad(false);
+
+        }
+        axios.post('http://localhost:3001/api/load_topic', {
             roomID: props.match.params.id
         }).then((response) => {
             setTopics(response.data);
@@ -62,7 +69,7 @@ const Page = (props) => {
             console.log(message);
             return;
         }
-        axios.post('/api/post_topic', {
+        axios.post('http://localhost:3001/api/post_topic', {
             title: title,
             detail: detail,
             room_id: props.match.params.id,
@@ -77,24 +84,11 @@ const Page = (props) => {
     return (
         <div className="page-container">
             <div className="page-divider">
-                <div className='page-logo'>
-                    {localStorage.getItem('currRoom')}
-                </div>
-                <div className="page-features">
-                    <button className="post-btn" onClick={openModal}>
-                        POST
-                    </button>
-                    <div style={{display: 'flex'}}>
-                        <input 
-                            placeholder="@username"
-                        />
-                        <button className="invite-btn">
-                            Invite
-                        </button>
-                    </div>
-                </div>
                 <div className="topic-section">
-                <div className="topic-logo">Topics</div>
+                    <label className='page-logo'>
+                        {localStorage.getItem('currRoom')}
+                    </label>
+                    <label className="topic-logo">Topics</label>
                     {topics.length > 0 ? topics.map(topic => 
                         <Topic key={topic.id} topic={topic} roomID={props.match.params.id}/>
                     )
@@ -102,17 +96,21 @@ const Page = (props) => {
                         <div style={{margin: '10% 0 0 35%', fontSize: '24px'}}>There are no topics currently</div>
                     }
                 </div>
+                <div className="page-features">
+                    <button className="post-btn" onClick={openModal}>Post</button>
+                    <button className="invite-btn">Invite</button>
+                </div>
             </div>
             <Modal 
-                isOpen={modal}
-                style={modalStyles}
+                isOpen={modal} style={modalStyles}
             >
-                <div style={{color: 'green', fontSize: '30px', textAlign: 'center', fontWeight: 'bold'}}>
-                    CREATE A TOPIC
-                </div>
-                <button onClick={closeModal} className="close-button" style={{margin: '0 0 25px 0', marginLeft: '96%'}}>
-                    <FaTimes/>
-                </button>
+                <label style={{color: 'green', fontSize: '30px'}}>CREATE A TOPIC</label>
+                <AiFillCloseSquare
+                    className="close-button" 
+                    onClick={closeModal}
+                    size={20}
+                    style={{float: 'right', backgroundColor: 'red'}}
+                />
                 <form onSubmit={handleSubmit}>
                     <input 
                         name="title" 
@@ -120,7 +118,6 @@ const Page = (props) => {
                         onChange={handleChange}
                         placeholder="Enter topic title"
                     />
-                    <br/><br/><br/><br/>
                     <textarea 
                         name="detail" 
                         value={detail}
@@ -128,7 +125,6 @@ const Page = (props) => {
                         placeholder="Enter additional details (optional)"
                         style={{height: '23vh'}}
                     /> 
-                    <br/><br/><br/>
                     <button 
                         type="submit" 
                         style={{marginLeft: '85%', backgroundColor: 'green', color: 'white', height: '40px', width: '80px'}}

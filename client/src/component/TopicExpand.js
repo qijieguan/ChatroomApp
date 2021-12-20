@@ -9,7 +9,7 @@ const Expand = (props) => {
     const [commentList, setCommentList] = useState([]);
 
     useEffect (() => {
-        axios.post('/api/load_comment', {
+        axios.post('http://localhost:3001/api/load_comment', {
             topic_id: props.match.params.id
         }).then((response) => {
             if (response.data) {
@@ -28,7 +28,7 @@ const Expand = (props) => {
             return;
         }
         console.log(comment);
-        axios.post('/api/post_comment', {
+        axios.post('http://localhost:3001/api/post_comment', {
             comment: comment,
             topic_id: props.match.params.id,
             user: localStorage.getItem("user")
@@ -50,9 +50,9 @@ const Expand = (props) => {
                 </div>
                 <div style={{color: 'green', marginLeft: '75%'}}>@{useLocation().state.topic.made_by}</div>
             </div>
-            <div className="comment-label">
+            <label className="comment-label">
                 Comments
-            </div>
+            </label>
             <div className="comment-list">
                 {commentList.length > 0 ? commentList.map(comment =>
                     <Comment key={comment.id} comment={comment} topicID={props.match.params.id}/>

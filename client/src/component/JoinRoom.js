@@ -19,7 +19,7 @@ export default function Join() {
     
     
     useEffect(() => { 
-        axios.get('/api/join').then((response) => {
+        axios.get('http://localhost:3001/api/join').then((response) => {
             let publicRooms = (response.data).filter(data => data.host_id !== localStorage.getItem("userID"));
             if (localStorage.getItem("myRooms")) {  
                 let joinedRooms = JSON.parse(localStorage.getItem("myRooms"));
@@ -31,7 +31,7 @@ export default function Join() {
 
     const joinRoom = (room_id) => {
         console.log(room_id);
-        axios.post('/api/join', {
+        axios.post('http://localhost:3001/api/join', {
             userID: localStorage.getItem("userID"),
             roomID: room_id
         }).then((response) => {

@@ -1,17 +1,19 @@
 *{
-  margin: 0;
-  padding: 0;
+  font-size: 14px;
+  font-weight: bold;
+  height: auto;
+  width: auto;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
-  font-size: 12.5px;
-  font-family: sans-serif;
+  text-align: center;
+  color: white;
 }
 
 .App {
   font-style: arial;
-  background-color: rgb(164, 164, 255);
-  min-height: 150vh;
-  height: auto;
-  padding-bottom: 40px;
+  background-color: rgb(255, 205, 205);
+  min-height: 800px;
 }
 
 .body {
@@ -20,156 +22,147 @@
 
 .nav-bar {
   display: flex;
-  height: 9vh;
-  background-color: rgb(77, 77, 255);
-  align-items: center;
   justify-content: space-around;
+  height: 60px;
+  background-color: red;
+  box-shadow: 1px 1px 1px 1px firebrick;
+}
+
+.nav-panel {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: red;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in;
+}
+
+.menu-icon {
+  width: 10%;
+}
+
+.menu-icon:hover .nav-panel {
+  transform: translateX(0%);
+}
+
+.nav-li {
+  display: block;
+  height: 100px;
+  line-height: 100px;
+  width: 250px;
+  border: solid 1px rgb(200, 200, 200);
+}
+
+.nav-li:hover {
+  opacity: 0.5;
 }
 
 .logo {
-  position: absolute;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 2px;
+  font-size: 35px;
+  font-family: copperplate;
+  text-shadow: 1px 1px rgb(158, 158, 158);
+  width: 70%;
 }
 
 .nav-links {
-  position: absolute;
-  color: white;
-  right: 2%;
   display: flex;
+  width: 20%;
 }
 
-.nav-links li {
-  font-size: 14px;
-  text-decoration: none;
-  padding: 22px 15px;
-  list-style: none;
-  color: white;
+.nav-links * {
+  height: 60px;
+  line-height: 60px;
+  width: 90px;
 }
 
-.front-page {
+.nav-links *:hover {
+  color: red;
+  background-color: white;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
   margin: 140px 0 0 28%;
-  height: auto;
-  width: 45vw;
+  width: 500px;
   font-size: 45px;
-  color: blue;
-  border: solid 2px blue;
-  background-color: rgb(200, 200, 255);
-  text-align: center;
+  color: red;
+  border: solid 2px firebrick;
+  background-color: rgb(255, 193, 193);
   padding: 30px 0;
   border-radius: 20px;
+}
+
+.login-container {
+  display: flex;
+}
+
+.login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.sample-login {
-  height: 200px;
-  width: 275px;
-  margin: 125px 0 0 75%;
-  list-style: none;
-  color: white;
-  background-color: rgb(170, 80, 255);
-  text-align: center;
-  padding: 20px;
-  border-radius: 100px;
-}
-
-main {
-  width: 95vw;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.create-form {
+  justify-content: space-evenly;
   margin: 50px 0 0 45px;
-  height: 60vh;
+  min-height: 500px;
   width: 450px;
-  border: solid 1px #EBEBEB;
-  padding: 4rem 5rem;
   background-color: white;
+  border: solid 1px #EBEBEB;
   border-radius: 10px;
   box-shadow: 0 0 4px #ccc;
-  text-align: center;
+}
+
+.login-form * {
+  font-family: fantasy;
+  letter-spacing: 1px;
+}
+
+.login-label {
+  color: green;
+  font-size: 30px;
 }
 
 .authenticate-btn {
-  margin-left: 10%;
-  margin-bottom: 65px;
-  color: white;
-  background-color: goldenrod;
+  background-color: limegreen;
   font-size: 16px;
   height: 70px;
   width: 80%;
   border-radius: 5px;
 }
 
-.hamburger {
-  position: absolute;
-  cursor: pointer;
-  left: 2%;
+.room-form {
+  display: grid;
+  grid-template-columns: 25% 65%;
+  grid-gap: 0 40px;
+  min-height: 800px;
+  width: 100%;
+  color: black;
+  background-color: white;
 }
 
-.hamburger div{
-  width: 22px;
-  height: 2px;
-  background: white;
-  margin: 4px;
+.room-form * {
+  font-size: 16px;
+  font-family: copperplate;
+  color: black;
 }
 
-.nav-panel {
-  position: absolute;
-  height: 140vh;
-  width: 18vw;
-  background-color: rgb(77, 77, 255);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in;
-  z-index: 1;
+.room-form label {
+  font-size: 18px;
+  color: navy;
+  text-align: right;
 }
 
-.nav-active {
-  transform: translateX(0%);
-}
-
-.nav-panel ul li {
-  color: white;
-  font-size: 14px;
-  text-decoration: none;
-  padding: 35px;
-  list-style: none;
-  border: solid 1px rgb(200, 200, 200);
-  text-align: center;
-}
-
-.create-room {
-  margin-top: 75px;
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
-  width: 45vw;
-  background-color: lightblue;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 10px;
-  border: solid 2px lightblue;
-}
+.room-form input {
+  height: 45px;
+  text-indent: 10px
+};
 
 .room-container {
   width: 85%;
-  height: auto;
   margin: 2% 0 0 5%;
 }
 
 .room {
   background-color: white;
   border-radius: 10px;
-  margin: 0 20px;
-  height: auto;
   width: 20vw; 
   display: inline-block;
   margin: 3%;
@@ -178,68 +171,51 @@ main {
 
 .room-heading {
   height: 30px;
-  border-radius: 10px 10px 0 0;
   width: 100%;
   background-color: lightblue;
-  text-align: center;
   font-size: 14px;
-  font-weight: bold;
   padding: 9px;
+  border-radius: 10px 10px 0 0;
 }
 
 .room-body {
   min-height: 180px;
-  height: auto;
   text-indent: 12px;
   padding-top: 9px;
 }
 
 .room-footing {
   min-height: 70px;
-  height: auto;
   background-color: lightblue;
   border-radius: 0 0 10px 10px;
   padding-top: 8px;
-  font-weight: bold;
 }
 
 .join-btn {
   height: 35px;
   width: 80px;
   background-color: rgb(138, 67, 214);
-  color: white;
-  text-align: center;
-  font-weight: bold;
   border-radius: 5px;
 }
 
 .room-label {
-  color: white;
   padding: 40px 0;
-  text-align: center;
 }
 
 .myRoom {
-  color: white;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
   padding: 20px 0;
   border: ridge 0.5px rgb(204, 204, 204);
   text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
 }
 
 .page-container {
-  margin-top: 50px;
-  margin-left: 10%;
-  height: auto;
-  min-height: 150vh;
+  margin: 50px 0 0 10%;
+  min-height: 800px;
   width: 80%;
   background-color: white;
-  border-radius: 15px;
-  align-items: center;
-  justify-content: space-around;
-  border: 1px solid gray;
+  border-radius: 10px;
 }
 
 .page-divider {
@@ -248,93 +224,83 @@ main {
 }
 
 .page-logo {
-  text-align: center;
-  border-radius: 15px 15px 0 0;
+  padding-top: 10px;
   height: 60px;
   background-color: rgb(138, 138, 253);
-  font-weight: bold;
-  color: white;
   font-size: 32px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  padding-top: 10px;
   border-bottom: 1px solid rgb(200, 200, 200);
+  border-radius: 15px 15px 0 0;
 }
 
 .page-features {
-  background-color: rgb(138, 138, 253);
-  display: grid;
-  grid-template-columns: 10% 45%;
-  grid-template-rows: auto;
-  align-items: center;
-  justify-content: space-around;
+  position: absolute;
+  top: 120px;
+  right: 0;
+  width: 200px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in;
+}
+
+.transformX {
+  transform: translateX(0);
 }
 
 .post-btn{
-  background-color: green;
-  color: white;
-  margin: 30px 0 30px 80px;
+  display: block;
   height: 50px;
-  width: 120px;
+  width: 100%;
   font-size: 16px;
-  font-weight: bold;
   letter-spacing: 2px;
-  cursor: pointer;
+  background-color: navy;
 }
 
 .invite-btn {
-  background-color: crimson;
-  color: white;
-  height: 40px;
-  width: 120px;
+  display: block;
+  height: 50px;
+  width: 100%;
   font-size: 16px;
-  font-weight: bold;
   letter-spacing: 2px;
-  cursor: pointer;
+  background-color: red;
 }
 
 .topic-logo {
+  width: 200px;
+  height: 90px;
+  padding: 28px 0;
   color: blue;
   font-size: 36px;
-  font-weight: bold;
   margin: 5% 0 80px 12%;
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: rgb(183, 183, 247);
-  width: 200px;
-  height: 90px;
-  text-align: center;
-  padding: 28px 0;
   border-radius: 30px;
   border: 1px solid rgb(138, 138, 253);
 }
 
 .topic-section {
   background-color: rgb(233, 233, 233);
-  height: auto;
   min-height: 850px;
   border-radius: 0 0 15px 15px;
 }
 
 .topic {
   margin-left: 20%;
-  height: auto;
   min-height: 40px;
   width: 60%;
-  border: 1px solid rgb(219, 200, 236);
   font-size: 14px;
-  font-weight: bold;
   display: flex;
-  align-items: center;
   text-indent: 20px;
+  border: 1px solid rgb(219, 200, 236);
   box-shadow: 0 0 10px 10px rgb(138, 138, 253) inset;
 }
 
 .topic-expand {
   margin: 50px 0 0 12.5%;
   width: 75%;
-  height: auto;
-  border-radius: 5px;
   text-indent: 10px;
   background-color: rgb(240, 240, 240);
   border-radius: 5px;
@@ -342,7 +308,6 @@ main {
 }
 
 .topic-title {
-  text-align: center;
   font-size: 32px;
   width: 100%;
   padding-top: 10px;
@@ -350,16 +315,14 @@ main {
 
 .topic-detail {
   padding: 20px 0 10px 0;
-  text-align: center;
-  border-bottom: 2px solid rgb(200, 200, 200);
   width: 100%;
+  border-bottom: 2px solid rgb(200, 200, 200);
 }
 
 .comment-label {
   padding: 15px 0 10px 15px;
   font-size: 14px;
   text-transform: uppercase;
-  font-weight: bold;
   border-bottom: 2px solid rgb(200, 200, 200);
   width: 100%;
   background-color: white;
@@ -368,29 +331,26 @@ main {
 .comment-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-top: 15px;
 }
 
 .comment {
   display: flex;
-  flex-direction: row;
   margin: 30px 0;
   width: 70%;
   height: 200px;
   justify-content: space-around;
-  align-items: center;
   border-radius: 5px;
   box-shadow: 5px 10px 10px 5px rgb(192, 192, 192);
 }
 
 .comment-content {
+  display: flex;
+  flex-direction: column;
   width: 93%;
   height: 200px;
   background-color:white;
   border-radius: 5px 0 0 5px;
-  display: flex;
-  flex-direction: column;
 }
 
 .comment-body {
@@ -402,38 +362,36 @@ main {
 
 .comment-footing {
   display: flex;
-  flex-direction: row;
   margin-left: 2%;
   height: 40px; 
   font-size: 14px;
 }
 
 .comment-icons {
-  height: 200px;
-  width: 7%;
   display: flex;
   flex-direction: column;
+  height: 200px;
+  width: 7%;
   background-color: rgb(30, 190, 30);
   border-radius: 0 5px 5px 0;
-  align-items: center;
 }
 
 .reply-box {
+  display: flex;
   width: 85%;
   margin-left: 7.5%;
   padding: 40px 0 50px 0;
-  display: flex;
 }
 
-textarea {
-  height: 80px;
-  width: 100%;
+input, textarea {
+  text-align: left;
+  text-indent: 1px;
+  width: 90%;
+  color: black;
 }
 
-input {
-  height: 40px;
-  width: 100%;
-  font-size: 16px;
+input:hover, textarea:hover, select:hover, button:hover {
+  opacity: 0.5;
 }
 
 a {

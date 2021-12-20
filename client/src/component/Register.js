@@ -24,7 +24,7 @@ export default function Register() {
             setError(true);
             return;
         }
-        axios.post('/api/register', {
+        axios.post('http://localhost:3001/api/register', {
             username: username,
             password: password  
         }).then((response) => {

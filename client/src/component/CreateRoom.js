@@ -21,7 +21,7 @@ export default function Create () {
             console.log("Missing input!")
             return;
         }
-        axios.post('/api/create', {
+        axios.post('http://localhost:3001/api/create', {
             host: localStorage.getItem('user'),
             subject: subject,
             desc: desc,
@@ -33,45 +33,60 @@ export default function Create () {
         window.location.reload();
     }
     return ( 
-        <div>
-            <main>
-                <form className="create-room" onSubmit={handleSubmit}>
-                    <br/>
-                    <h1 style={{fontSize: '24px', marginBottom: '32px', color: 'green'}}>Create Room</h1>
-                    <input 
-                        name="host"
-                        defaultValue={localStorage.getItem("user")}
-                        style = {{pointerEvents: 'none', backgroundColor: 'rgb(230, 230, 230)'}}
-                    >
-                    </input><br/>
-                    <input
-                        name="subject"
-                        value={subject}
-                        placeholder="Enter course subject"
-                        onChange={handleChange}
-                    >
-                    </input><br/>
-                    <textarea
-                        name="description"
-                        value={desc}
-                        placeholder="Enter course description (optional)"
-                        onChange={handleChange}
-                    >
-                    </textarea><br/>
-                    <div>
-                        <label style={{margin: '5px'}}>Privacy</label>
-                        <select id="privacy" name="privacy">
-                            <option value="public">Public</option>
-                            <option value="private">Private</option>
-                        </select><br/><br/>
-                    </div>
-                    <button type="submit" 
-                        style={{width: '40%', height: '40px', background: 'green', color: 'white'}}
-                    >
-                    CREATE</button>
-                    <br/>
-                </form>
-            </main>
-        </div>
+        <form className="room-form">
+            <h1 style={styleH1}>Create Room</h1>
+
+            <label>Host</label>
+            <input 
+                name="host"
+                defaultValue={localStorage.getItem("user")}
+                style = {{pointerEvents: 'none', backgroundColor: 'rgb(230, 230, 230)'}}
+            />
+
+            <label>Subject<span style={{color: 'red'}}>*</span></label>
+            <input
+                name="subject"
+                value={subject}
+                placeholder='Enter subject here... '
+                onChange={handleChange}
+            />
+
+            <label>Description </label>
+            <textarea
+                name="description"
+                placeholder='Enter description here... <optional>'
+                value={desc}
+                onChange={handleChange}
+                style={{height: '150px'}}
+            />
+
+            <label style={{margin: '5px'}}>Privacy<span style={{color: 'red'}}>*</span></label>
+            <select id="privacy" name="privacy" style={{width: '50%'}}>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+            </select>
+
+            <button type="submit" 
+                style={submitStyle}
+                onClick={handleSubmit}
+            >CREATE</button>
+        </form>
     );
 };
+
+const styleH1 = {
+    gridColumn: '1 / 3',
+    fontSize: '40px', 
+    color: 'navy', 
+    textShadow: '1px 1px blue'
+}
+
+const submitStyle = {
+    gridColumn: '1 / 3',
+    marginLeft: '15%',
+    fontSize: '22px',
+    height: '80px', 
+    width: '70%', 
+    backgroundColor: 'navy', 
+    color: 'white',
+}

@@ -10,7 +10,7 @@ const Comment = ({ comment, topicID }) => {
     const [dislikes, setDislikes] = useState(0);
 
     const updateLikes = () => {
-        axios.post('/api/rate/like', {
+        axios.post('http://localhost:3001/api/rate/like', {
             userID: localStorage.getItem("userID"),
             topicID: topicID
         }).then((response) => {
@@ -19,7 +19,7 @@ const Comment = ({ comment, topicID }) => {
     };
 
     const updateDislikes = () => {
-        axios.post('/api/rate/dislike', {
+        axios.post('http://localhost:3001/api/rate/dislike', {
             userID: localStorage.getItem("userID"),
             topicID: topicID
         }).then((response) => {
@@ -28,7 +28,7 @@ const Comment = ({ comment, topicID }) => {
     };
 
     const handleDelete = () => {
-        axios.post('/api/comment/delete', {
+        axios.post('http://localhost:3001/api/comment/delete', {
             commentID: comment.id
         });
         window.location.reload();
