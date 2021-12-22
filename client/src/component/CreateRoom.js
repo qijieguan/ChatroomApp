@@ -17,7 +17,7 @@ export default function Create () {
 
     const handleSubmit = event => {
         event.preventDefault();
-        if (!subject || !desc) {
+        if (!subject) {
             console.log("Missing input!")
             return;
         }
@@ -88,5 +88,4 @@ const submitStyle = {
     height: '80px', 
     width: '70%', 
     backgroundColor: 'navy', 
-    color: 'white',
 }

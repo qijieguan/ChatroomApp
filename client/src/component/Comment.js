@@ -42,10 +42,18 @@ const Comment = ({ comment, topicID }) => {
                 </p>
                 <div className="comment-footing">
                     <div>Post by: <span style={{color: 'green'}}>{comment.made_by}</span></div>
-                    <MdThumbUp style={{color: 'green', fontSize: '16px', marginLeft: '34%'}} onClick={updateLikes}/>
-                    <div style={{marginRight: '12px'}}>{likes}</div>
-                    <MdThumbDown style={{color: 'red', fontSize: '16px'}} onClick={updateDislikes}/>
-                    <div>{dislikes}</div>
+                    <div style={{display: 'flex'}}>
+                        <MdThumbUp onClick={updateLikes}
+                            size={24}
+                            color='blue'
+                        />
+                        <div style={{marginRight: '20px'}}>{likes}</div>
+                        <MdThumbDown onClick={updateDislikes}
+                            size={24}
+                            color='red'
+                        />
+                        <div>{dislikes}</div>
+                    </div>
                 </div>
             </div>
             <div className="comment-icons">
@@ -53,7 +61,6 @@ const Comment = ({ comment, topicID }) => {
                     style={{
                         display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
                         fontSize: '20px', 
-                        color: 'white', 
                         marginTop: '20px'
                     }}
                 />
@@ -61,7 +68,6 @@ const Comment = ({ comment, topicID }) => {
                     style={{
                         display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
                         fontSize: '18px', 
-                        color: 'white', 
                         marginTop: '20px'
                     }}
                 />

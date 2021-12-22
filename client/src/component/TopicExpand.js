@@ -24,9 +24,7 @@ const Expand = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        if (!comment) {
-            return;
-        }
+        if (!comment) {return;}
         console.log(comment);
         axios.post('http://localhost:3001/api/post_comment', {
             comment: comment,
@@ -50,9 +48,7 @@ const Expand = (props) => {
                 </div>
                 <div style={{color: 'green', marginLeft: '75%'}}>@{useLocation().state.topic.made_by}</div>
             </div>
-            <label className="comment-label">
-                Comments
-            </label>
+            <label className="comment-label">COMMENTS</label>
             <div className="comment-list">
                 {commentList.length > 0 ? commentList.map(comment =>
                     <Comment key={comment.id} comment={comment} topicID={props.match.params.id}/>
@@ -62,12 +58,12 @@ const Expand = (props) => {
                 } 
             </div>
             <div className="reply-box">
-                <textarea style={{height: '60px', fontSize: '14px'}} 
+                <textarea style={{height: '60px'}} 
                     onChange={handleChange} 
                     value= {comment}
                     placeholder="Write your reply..."/>
                 <button 
-                    style={{height: '60px', width: '60px', color: 'white', backgroundColor: 'green'}} 
+                    style={{height: '60px', width: '60px', backgroundColor: 'green'}} 
                     onClick={handleSubmit}
                 >Enter</button>
             </div>

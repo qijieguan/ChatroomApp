@@ -37,36 +37,37 @@ export default function Register() {
 
     return (
         <div className="register-container">
-            <main>
-                <br/><br/>
-                <form className="create-form" onSubmit={handleSubmit}>
-                    <h1 style={{fontSize: '24px', marginBottom: '32px', color: 'goldenrod'}}>Registration</h1>
-                    <div style={{color: (error ? 'red' : 'goldenrod'), marginBottom: '20px', fontSize: '16px'}}>{message}</div>
-                    <input 
-                        name="username"
-                        value={username} 
-                        placeholder="Enter username"
-                        onChange={handleChange}
-                        style={{marginBottom: '10px'}} 
-                    ></input><br/><br/>
-                    <input 
-                        name="password"
-                        type="password"
-                        value={password}
-                        placeholder="Enter password"
-                        onChange={handleChange} 
-                        style={{marginBottom: '10px'}} 
-                    ></input><br/><br/><br/><br/>
-                    <Link to='/login' style={{fontSize: '14px', color: 'blue'}}>
-                        Login
-                    </Link>
-                    <br/><br/>
-                    <button type="submit" 
-                        className="btn waves-effect green" 
-                        style={{width: '100%', height: '50px', background: 'goldenrod', color: 'white'}}
-                    >REGISTER</button>
-                </form>
-            </main>
+        <form className="register-form" onSubmit={handleSubmit}>
+            <label className='register-label'>Register</label>
+            <div className='error-msg'
+                style={{
+                    color: error ? 'red' : 'goldenrod', 
+                    display: message ? '' : 'none',
+                    marginBottom: '20px', 
+                    fontSize: '16px'
+                }}
+                >{message}</div>
+                <input 
+                    name="username"
+                    value={username} 
+                    placeholder="Enter username"
+                    onChange={handleChange}
+                    style={{marginBottom: '10px', height: '40px'}} 
+                ></input>
+                <input 
+                    name="password"
+                    type="password"
+                    value={password}
+                    placeholder="Enter password"
+                    onChange={handleChange} 
+                    style={{marginBottom: '10px', height: '40px'}} 
+                ></input>
+                <Link to='/login' style={{color: 'blue'}}>Login</Link>
+                <button type="submit" 
+                    className="btn waves-effect green" 
+                    style={{width: '90%', height: '50px', backgroundColor: 'green'}}
+                >REGISTER</button>
+            </form>
         </div>
     );
 }

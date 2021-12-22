@@ -25,8 +25,8 @@ export default function Login() {
 
     Modal.setAppElement(document.getElementById('root'));
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("Guest");
+    const [password, setPassword] = useState("password");
     const [error, setError] = useState(false);
     const [message, setMessage] = useState("");
     const [id, setUID] = useState(-1);
@@ -70,6 +70,7 @@ export default function Login() {
     }
 
     const closeModal = () => {
+        setMessage("");
         setModal(false);
     };
 

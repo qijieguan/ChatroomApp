@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { AiFillCloseSquare } from 'react-icons/ai';
 import axios from 'axios';
 import Topic from './Topic.js';
+import Category from './Category.js';
 
 const Page = (props) => {
 
@@ -12,8 +13,8 @@ const Page = (props) => {
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-        width: '50%',
-        height: '50%',
+        width: '70%',
+        height: '70%',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         alignItem: 'center',
@@ -21,7 +22,6 @@ const Page = (props) => {
         }
     };
 
-    const [onload, setLoad] = useState(true)
     const [topics, setTopics] = useState([]);
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
@@ -29,12 +29,6 @@ const Page = (props) => {
     const [modal, setModal] = useState(false);
     
     useEffect(() => {
-        if (onload) {
-            const nav = document.querySelector(".page-features");
-            nav.classList.toggle("transformX");
-            setLoad(false);
-
-        }
         axios.post('http://localhost:3001/api/load_topic', {
             roomID: props.match.params.id
         }).then((response) => {
@@ -49,6 +43,8 @@ const Page = (props) => {
     }
 
     const closeModal = () => {
+        setTitle("");
+        setDetail("");
         setModal(false);
     }
 
@@ -75,8 +71,6 @@ const Page = (props) => {
             room_id: props.match.params.id,
             user: localStorage.getItem("user")
         });
-        setTitle("");
-        setDetail("");
         closeModal();
         window.location.reload();
     }
@@ -85,10 +79,8 @@ const Page = (props) => {
         <div className="page-container">
             <div className="page-divider">
                 <div className="topic-section">
-                    <label className='page-logo'>
-                        {localStorage.getItem('currRoom')}
-                    </label>
-                    <label className="topic-logo">Topics</label>
+                    <label className='page-label'>{localStorage.getItem('currRoom')}</label>
+                    <label className="topic-label">Topics</label>
                     {topics.length > 0 ? topics.map(topic => 
                         <Topic key={topic.id} topic={topic} roomID={props.match.params.id}/>
                     )
@@ -99,6 +91,7 @@ const Page = (props) => {
                 <div className="page-features">
                     <button className="post-btn" onClick={openModal}>Post</button>
                     <button className="invite-btn">Invite</button>
+                    <input className="invite-user" placeholder='@username'/>
                 </div>
             </div>
             <Modal 
@@ -112,22 +105,23 @@ const Page = (props) => {
                     style={{float: 'right', backgroundColor: 'red'}}
                 />
                 <form onSubmit={handleSubmit}>
-                    <input 
-                        name="title" 
+                    <input name="title" style={{marginTop: '40px', height: '40px', fontSize: '18px'}}
                         value={title}
                         onChange={handleChange}
                         placeholder="Enter topic title"
                     />
-                    <textarea 
-                        name="detail" 
+                    <textarea name="detail" style={{marginTop: '20px', height: '200px', fontSize: '16px'}}
                         value={detail}
                         onChange={handleChange}
                         placeholder="Enter additional details (optional)"
-                        style={{height: '23vh'}}
-                    /> 
-                    <button 
-                        type="submit" 
-                        style={{marginLeft: '85%', backgroundColor: 'green', color: 'white', height: '40px', width: '80px'}}
+                    />
+                    <label style={{display: 'block', fontSize: '24px', color: 'black', margin: '40px 0 10px 0'}}>
+                        Pick one to represent topic<span style={{color: 'red', fontSize: '24px'}}>*</span>
+                    </label>
+                    <Category/>
+                    
+                    <button type="submit" 
+                        style={{margin: '10px 0 0 75%', backgroundColor: 'green', height: '40px', width: '80px'}}
                     >SUBMIT</button> 
                 </form>
             </Modal>
