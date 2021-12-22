@@ -9,6 +9,7 @@ export default function Register() {
     const [error, setError] = useState("");
 
     const handleChange = event => {
+        event.preventDefault();
         if (event.target.name === "username") {
             setUsername(event.target.value);
         }
@@ -24,7 +25,7 @@ export default function Register() {
             setError(true);
             return;
         }
-        axios.post('http://localhost:3001/api/register', {
+        axios.post('/api/register', {
             username: username,
             password: password  
         }).then((response) => {

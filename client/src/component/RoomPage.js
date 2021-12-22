@@ -25,16 +25,16 @@ const Page = (props) => {
     const [topics, setTopics] = useState([]);
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
-    const [message, setMessage] = useState("");
     const [modal, setModal] = useState(false);
-    
+    const [update, setUpdate] = useState(false);
+
     useEffect(() => {
-        axios.post('http://localhost:3001/api/load_topic', {
+        axios.post('/api/load_topic', {
             roomID: props.match.params.id
         }).then((response) => {
             setTopics(response.data);
         });
-    }, [props.match.params.id]);
+    }, [props.match.params.id, update]);
 
     Modal.setAppElement(document.getElementById('root'));
 
@@ -60,19 +60,15 @@ const Page = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        if (!title) {
-            setMessage('Invalid title input!');
-            console.log(message);
-            return;
-        }
-        axios.post('http://localhost:3001/api/post_topic', {
+        if (!title) {return;}
+        axios.post('/api/post_topic', {
             title: title,
             detail: detail,
             room_id: props.match.params.id,
             user: localStorage.getItem("user")
         });
         closeModal();
-        window.location.reload();
+        setUpdate(!update);
     }
 
     return (

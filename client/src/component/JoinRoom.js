@@ -19,7 +19,7 @@ export default function Join() {
     
     
     useEffect(() => { 
-        axios.get('http://localhost:3001/api/join').then((response) => {
+        axios.get('/api/join').then((response) => {
             let publicRooms = (response.data).filter(data => data.host_id !== localStorage.getItem("userID"));
             if (localStorage.getItem("myRooms")) {  
                 let joinedRooms = JSON.parse(localStorage.getItem("myRooms"));
@@ -27,18 +27,15 @@ export default function Join() {
                 setRoomList(publicRooms);
             }
         });         
-    }, []);
+    }, [RoomList]);
 
     const joinRoom = (room_id) => {
-        console.log(room_id);
-        axios.post('http://localhost:3001/api/join', {
+        axios.post('/api/join', {
             userID: localStorage.getItem("userID"),
             roomID: room_id
         }).then((response) => {
-            console.log(response.data);
             setRoomList((RoomList.filter(data => data.id !== room_id)));
         });
-        window.location.reload();
     };
 
     return(

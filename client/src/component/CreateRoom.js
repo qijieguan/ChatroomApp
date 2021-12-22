@@ -21,7 +21,7 @@ export default function Create () {
             console.log("Missing input!")
             return;
         }
-        axios.post('http://localhost:3001/api/create', {
+        axios.post('/api/create', {
             host: localStorage.getItem('user'),
             subject: subject,
             desc: desc,

@@ -10,7 +10,7 @@ const Comment = ({ comment, topicID }) => {
     const [dislikes, setDislikes] = useState(0);
 
     const updateLikes = () => {
-        axios.post('http://localhost:3001/api/rate/like', {
+        axios.post('api/rate/like', {
             userID: localStorage.getItem("userID"),
             topicID: topicID
         }).then((response) => {
@@ -19,7 +19,7 @@ const Comment = ({ comment, topicID }) => {
     };
 
     const updateDislikes = () => {
-        axios.post('http://localhost:3001/api/rate/dislike', {
+        axios.post('/api/rate/dislike', {
             userID: localStorage.getItem("userID"),
             topicID: topicID
         }).then((response) => {
@@ -28,30 +28,24 @@ const Comment = ({ comment, topicID }) => {
     };
 
     const handleDelete = () => {
-        axios.post('http://localhost:3001/api/comment/delete', {
+        axios.post('/api/comment/delete', {
             commentID: comment.id
         });
-        window.location.reload();
+        document.getElementById(comment.id).remove();
     };
 
     return(
-        <div className="comment">
+        <div className="comment" id={comment.id}>
             <div className="comment-content">
-                <p className="comment-body">
+                <div className="comment-body">
                     {comment.comment}
-                </p>
+                </div>
                 <div className="comment-footing">
                     <div>Post by: <span style={{color: 'green'}}>{comment.made_by}</span></div>
                     <div style={{display: 'flex'}}>
-                        <MdThumbUp onClick={updateLikes}
-                            size={24}
-                            color='blue'
-                        />
+                        <MdThumbUp onClick={updateLikes} size={24}/>
                         <div style={{marginRight: '20px'}}>{likes}</div>
-                        <MdThumbDown onClick={updateDislikes}
-                            size={24}
-                            color='red'
-                        />
+                        <MdThumbDown onClick={updateDislikes}size={24}/>
                         <div>{dislikes}</div>
                     </div>
                 </div>
@@ -61,14 +55,13 @@ const Comment = ({ comment, topicID }) => {
                     style={{
                         display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
                         fontSize: '20px', 
-                        marginTop: '20px'
                     }}
                 />
                 <FaRegEdit
                     style={{
                         display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
                         fontSize: '18px', 
-                        marginTop: '20px'
+                        marginTop: '30px'
                     }}
                 />
             </div>

@@ -177,6 +177,7 @@
   text-align: left;
   min-height: 180px;
   font-family: serif;
+  color: gray;
   background-color: rgb(215, 215, 255);
 }
 
@@ -324,7 +325,7 @@
 }
 
 .comment-label {
-  padding: 15px 0 10px 0;
+  padding: 20px 0 10px 0;
   border-bottom: 2px solid rgb(200, 200, 200);
   width: 100%;
 }
@@ -337,45 +338,41 @@
 
 .comment {
   display: flex;
-  margin: 30px 0;
+  margin-top: 30px;
   width: 80%;
-  height: 250px;
   justify-content: space-around;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px 2px lime;
+  box-shadow: 2px 2px 2px 2px white;
 }
 
 .comment-content {
   display: flex;
   flex-direction: column;
   width: 93%;
-  height: 200px;
-  background-color:white;
-  border-radius: 5px 0 0 5px;
-  color: black;
-}
-
-.comment-content * {
-  color: black;
 }
 
 .comment-body {
+  padding-top: 10px;
+  text-align: left;
   text-indent: 25px;
-  margin-top: 20px;
-  height: 260px;
+  min-height: 200px;
+  width: 100%;
+  color: black;
+  background-color: white;
+  border-radius: 5px 0 0 5px;
 }
 
 .comment-footing {
   display: flex;
-  width: 90%;
   justify-content: space-between;
-  min-height: 40px; 
+  height: 40px; 
+  width: 90%;
 }
 
 .comment-icons {
   display: flex;
   flex-direction: column;
-  height: 200px;
+  min-height: 240px;
   width: 7%;
   background-color: rgb(30, 190, 30);
   border-radius: 0 5px 5px 0;

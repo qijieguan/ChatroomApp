@@ -10,7 +10,7 @@ const Menu = () => {
 
     useEffect(() => {
         if (localStorage.getItem("myRooms")) {
-            axios.post('http://localhost:3001/api/load', {
+            axios.post('/api/load', {
                 userID: localStorage.getItem("userID")
             }).then((response) => {
                 if (response.data) {
@@ -50,7 +50,7 @@ const Menu = () => {
                         {Rooms ? 
                             Rooms.map(room => 
                                 room.host !== localStorage.getItem("user") ?
-                                    <Link to={`/room/${room.id}`} key={room.id} className="my-room" onClick={() => {localStorage.setItem('currRoom', room.subject)}}>
+                                    <Link to={`/room/${room.id}`} key={room.id} className="my-room nav-li" onClick={() => {localStorage.setItem('currRoom', room.subject)}}>
                                         {room.subject}
                                     </Link>
                                     :

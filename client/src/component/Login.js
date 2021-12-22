@@ -33,6 +33,7 @@ export default function Login() {
     const [modal, setModal] = useState(false);
 
     const handleChange = event => {
+        event.preventDefault();
         if (event.target.name === "username") {
             setUsername(event.target.value);
         }
@@ -48,7 +49,7 @@ export default function Login() {
             setError(true);
             return;
         }
-        axios.post('http://localhost:3001/api/login', {
+        axios.post('/api/login', {
             username: username,
             password: password  
         }).then((response) => {
@@ -75,7 +76,7 @@ export default function Login() {
     };
 
     const userAuthentication = () => {
-        axios.get('http://localhost:3001/api/auth', {
+        axios.get('/api/auth', {
             headers: {
                 "x-access-token": localStorage.getItem("token")
             }
@@ -85,7 +86,7 @@ export default function Login() {
                 localStorage.setItem("user", username);
                 localStorage.setItem("userID", id);
                 setMessage(response.data.message);
-                axios.post('http://localhost:3001/api/load', {
+                axios.post('/api/load', {
                     userID: id,
                 }).then((response) => {
                     console.log(response.data)
@@ -131,12 +132,12 @@ export default function Login() {
                     style={{width: '90%', height: '50px', backgroundColor: 'green'}}
                 >LOGIN</button>
                 <Modal isOpen={modal} style={modalStyles}>
-                        <AiFillCloseSquare
-                            className="close-button" 
-                            onClick={closeModal}
-                            size={20}
-                            style={{alignSelf: 'flex-end', backgroundColor: 'red'}}
-                        />
+                    <AiFillCloseSquare
+                        className="close-button" 
+                        onClick={closeModal}
+                        size={20}
+                        style={{alignSelf: 'flex-end', backgroundColor: 'red'}}
+                    />
                     <button className="authenticate-btn" onClick={userAuthentication}>
                         Click to Authenticate
                     </button> 
