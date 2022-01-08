@@ -41,11 +41,11 @@ const Comment = ({ comment, topicID }) => {
                     {comment.comment}
                 </div>
                 <div className="comment-footing">
-                    <div>Post by: <span style={{color: 'green'}}>{comment.made_by}</span></div>
+                    <div>Post by: <span style={{color: 'green'}}>{"@" + comment.made_by}</span></div>
                     <div style={{display: 'flex'}}>
-                        <MdThumbUp onClick={updateLikes} size={24}/>
+                        <MdThumbUp onClick={updateLikes} size={24} color='red'/>
                         <div style={{marginRight: '20px'}}>{likes}</div>
-                        <MdThumbDown onClick={updateDislikes}size={24}/>
+                        <MdThumbDown onClick={updateDislikes} size={24} color='blue'/>
                         <div>{dislikes}</div>
                     </div>
                 </div>
@@ -54,14 +54,16 @@ const Comment = ({ comment, topicID }) => {
                 <VscTrash onClick={handleDelete} 
                     style={{
                         display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
-                        fontSize: '20px', 
+                        fontSize: '24px', 
+                        color: 'white'
                     }}
                 />
                 <FaRegEdit
                     style={{
                         display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
-                        fontSize: '18px', 
-                        marginTop: '30px'
+                        fontSize: '20px', 
+                        marginTop: '30px',
+                        color: 'white'
                     }}
                 />
             </div>

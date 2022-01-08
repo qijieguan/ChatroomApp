@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from "react-modal";
 import { AiFillCloseSquare } from 'react-icons/ai';
 import axios from 'axios';
+import { uuid } from 'react-uuid';
 import Topic from './Topic.js';
 import Category from './Category.js';
 
@@ -25,6 +26,7 @@ const Page = (props) => {
     const [topics, setTopics] = useState([]);
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
+    const [members, setMembers] = useState([]);
     const [modal, setModal] = useState(false);
     const [update, setUpdate] = useState(false);
 
@@ -33,6 +35,12 @@ const Page = (props) => {
             roomID: props.match.params.id
         }).then((response) => {
             setTopics(response.data);
+        });
+
+        axios.post('/api/load_members', {
+            roomID: props.match.params.id
+        }).then((response) => {
+            setMembers(response.data);
         });
     }, [props.match.params.id, update]);
 
@@ -49,7 +57,6 @@ const Page = (props) => {
     }
 
     const handleChange = event => {
-        event.preventDefault();
         if (event.target.name === "title") {
             setTitle(event.target.value);
         }
@@ -73,23 +80,22 @@ const Page = (props) => {
 
     return (
         <div className="page-container">
-            <div className="page-divider">
-                <div className="topic-section">
-                    <label className='page-label'>{localStorage.getItem('currRoom')}</label>
-                    <label className="topic-label">Topics</label>
-                    {topics.length > 0 ? topics.map(topic => 
-                        <Topic key={topic.id} topic={topic} roomID={props.match.params.id}/>
-                    )
-                        :
-                        <div style={{margin: '10% 0 0 35%', fontSize: '24px'}}>There are no topics currently</div>
-                    }
-                </div>
-                <div className="page-features">
-                    <button className="post-btn" onClick={openModal}>Post</button>
-                    <button className="invite-btn">Invite</button>
-                    <input className="invite-user" placeholder='@username'/>
-                </div>
+            <div className="topic-section">
+                <label className='page-label'>{localStorage.getItem('currRoom')}</label>
+                <label className="topic-label">Topics</label>
+                {topics.length > 0 ? topics.map(topic => 
+                    <Topic key={topic.id} topic={topic} roomID={props.match.params.id}/>
+                )
+                    :
+                    <div style={{textAlign: 'center', fontSize: '30px'}}>There are no topics currently</div>
+                }
             </div>
+            <div className="page-features">
+                <button className="post-btn" onClick={openModal}>Post</button>
+                <div className="member-label">Members</div>
+                {members.map(member => <li className='member'>{'@' + member.username}</li>)}
+            </div>
+        
             <Modal 
                 isOpen={modal} style={modalStyles}
             >
@@ -98,7 +104,7 @@ const Page = (props) => {
                     className="close-button" 
                     onClick={closeModal}
                     size={20}
-                    style={{float: 'right', backgroundColor: 'red'}}
+                    style={{float: 'right', color: 'white', backgroundColor: 'red'}}
                 />
                 <form onSubmit={handleSubmit}>
                     <input name="title" style={{marginTop: '40px', height: '40px', fontSize: '18px'}}

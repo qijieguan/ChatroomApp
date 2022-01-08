@@ -6,7 +6,6 @@ export default function Create () {
     const [desc, setDesc] = useState("");
 
     const handleChange = event => {
-        event.preventDefault();
         if (event.target.name === "subject") {
             setSubject(event.target.value);
         }
@@ -87,5 +86,6 @@ const submitStyle = {
     fontSize: '22px',
     height: '80px', 
     width: '70%', 
+    color: 'white',
     backgroundColor: 'navy', 
 }

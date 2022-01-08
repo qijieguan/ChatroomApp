@@ -33,7 +33,6 @@ export default function Login() {
     const [modal, setModal] = useState(false);
 
     const handleChange = event => {
-        event.preventDefault();
         if (event.target.name === "username") {
             setUsername(event.target.value);
         }
@@ -129,14 +128,14 @@ export default function Login() {
                 <Link to='/register' style={{color: 'blue'}}>Register</Link>
                 <button type="submit" 
                     className="btn waves-effect green" 
-                    style={{width: '90%', height: '50px', backgroundColor: 'green'}}
+                    style={{width: '90%', height: '50px', color: 'white', backgroundColor: 'green'}}
                 >LOGIN</button>
                 <Modal isOpen={modal} style={modalStyles}>
                     <AiFillCloseSquare
                         className="close-button" 
                         onClick={closeModal}
                         size={20}
-                        style={{alignSelf: 'flex-end', backgroundColor: 'red'}}
+                        style={{alignSelf: 'flex-end', color: 'white', backgroundColor: 'red'}}
                     />
                     <button className="authenticate-btn" onClick={userAuthentication}>
                         Click to Authenticate

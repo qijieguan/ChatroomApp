@@ -20,7 +20,6 @@ const Expand = (props) => {
     }, [props.match.params.id, update]);
 
     const handleChange = event => {
-        event.preventDefault();
         setComment(event.target.value);
     }
 
@@ -31,7 +30,7 @@ const Expand = (props) => {
             comment: comment,
             topic_id: props.match.params.id,
             user: localStorage.getItem("user")
-        })
+        });
         setComment("");
         setUpdate(!update);
     }
@@ -62,7 +61,7 @@ const Expand = (props) => {
                     value= {comment}
                     placeholder="Write your reply..."/>
                 <button 
-                    style={{height: '60px', width: '60px', backgroundColor: 'green'}} 
+                    style={{height: '60px', width: '60px', color: 'white', backgroundColor: 'green'}} 
                     onClick={handleSubmit}
                 >Enter</button>
             </div>

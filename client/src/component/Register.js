@@ -9,7 +9,6 @@ export default function Register() {
     const [error, setError] = useState("");
 
     const handleChange = event => {
-        event.preventDefault();
         if (event.target.name === "username") {
             setUsername(event.target.value);
         }
@@ -66,7 +65,7 @@ export default function Register() {
                 <Link to='/login' style={{color: 'blue'}}>Login</Link>
                 <button type="submit" 
                     className="btn waves-effect green" 
-                    style={{width: '90%', height: '50px', backgroundColor: 'green'}}
+                    style={{width: '90%', height: '50px', color: 'white', backgroundColor: 'green'}}
                 >REGISTER</button>
             </form>
         </div>

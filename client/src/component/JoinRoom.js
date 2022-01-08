@@ -43,7 +43,7 @@ export default function Join() {
             {RoomList.length > 0 ? RoomList.map(room => 
                 <Room room={room} key={room.id} joinRoom={joinRoom} />)
             :
-                <div style={{margin: '10% 0 0 44%', fontSize: '24px'}}>No classrooms open currently</div>    
+                <div style={{marginTop: '10%', fontSize: '30px', textAlign: 'center'}}>No classrooms open currently</div>    
             }
         </div>
     );

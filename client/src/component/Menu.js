@@ -28,12 +28,13 @@ const Menu = () => {
                 <div className="menu-icon" style={{float: 'center'}}>
                     <AiOutlineMenuFold
                         size={25}
+                        color='white'
                         style={{float: 'left', marginLeft: '40px'}}
                     />
-                    <div className="nav-panel">
+                    <nav className="nav-panel">
                         <Link to="/create" className='nav-li'>Create Classroom</Link>
                         <Link to="/join" className='nav-li'>Join Classroom</Link>
-                        <div className="room-label">- - - - - - - Own - - - - - - -</div>
+                        <label className="room-label">- - - - - - - Own - - - - - - -</label>
                         {Rooms ? 
                             Rooms.map(room => 
                                 room.host === localStorage.getItem("user") ?
@@ -46,7 +47,7 @@ const Menu = () => {
                             )
                         :
                             ''}
-                        <div className="room-label"> - - - - - - - Joined - - - - - - -</div>
+                        <label className="room-label"> - - - - - - - Joined - - - - - - -</label>
                         {Rooms ? 
                             Rooms.map(room => 
                                 room.host !== localStorage.getItem("user") ?
@@ -58,7 +59,7 @@ const Menu = () => {
                             )
                         :
                             ''}
-                    </div>
+                    </nav>
                 </div>
                 :
                 <div/>

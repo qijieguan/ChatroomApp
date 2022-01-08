@@ -203,6 +203,28 @@ app.post('/api/post_topic', (req, res) => {
     );
 });
 
+app.post('/api/load_members', (req, res) => {
+    const roomID = req.body.roomID;
+    db.query("SELECT users_by_id from room WHERE id = ?",
+        roomID,
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            let parsedUID = result[0].users_by_id.split('*');
+            db.query("SELECT username from user WHERE id = ? OR id = ?",
+            [parsedUID[0], parsedUID[1]],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.send(result);
+            }
+        );
+        }    
+    )
+});
+
 app.post('/api/load_comment', (req, res) => {
     const topic_id = req.body.topic_id;
     db.query("SELECT * from comment WHERE topic_id = ?",
@@ -320,7 +342,7 @@ app.post('/api/comment/delete', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 const PORT = process.env.PORT || 3001;

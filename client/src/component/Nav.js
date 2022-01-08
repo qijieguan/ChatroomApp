@@ -13,14 +13,14 @@ export default function Nav () {
             <header className = "nav-bar">
                     <Menu/>
                     <div className="logo">Topic Road</div>
-                    <div className="nav-links">     
+                    <nav className="nav-links">     
                         <Link to="/">Home</Link>
                         {localStorage.getItem("isLogged") ?
                             <Link onClick={logout} to="/" className="logout">Logout</Link>
                         :
                             <Link to="/login" className="login">Login</Link>
                         }
-                    </div>
+                    </nav>
             </header>
         </div>
     );
