@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Modal from "react-modal";
 import { AiFillCloseSquare } from 'react-icons/ai';
 import axios from 'axios';
-import { uuid } from 'react-uuid';
 import Topic from './Topic.js';
 import Category from './Category.js';
+import uuid from 'react-uuid';
 
 const Page = (props) => {
 
@@ -31,13 +31,13 @@ const Page = (props) => {
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-        axios.post('/api/load_topic', {
+        axios.post('http://localhost:3001/api/load_topic', {
             roomID: props.match.params.id
         }).then((response) => {
             setTopics(response.data);
         });
 
-        axios.post('/api/load_members', {
+        axios.post('http://localhost:3001/api/load_members', {
             roomID: props.match.params.id
         }).then((response) => {
             setMembers(response.data);
@@ -68,7 +68,7 @@ const Page = (props) => {
     const handleSubmit = event => {
         event.preventDefault();
         if (!title) {return;}
-        axios.post('/api/post_topic', {
+        axios.post('http://localhost:3001/api/post_topic', {
             title: title,
             detail: detail,
             room_id: props.match.params.id,
@@ -93,7 +93,7 @@ const Page = (props) => {
             <div className="page-features">
                 <button className="post-btn" onClick={openModal}>Post</button>
                 <div className="member-label">Members</div>
-                {members.map(member => <li className='member'>{'@' + member.username}</li>)}
+                {members.map(member => <li key={uuid()} className='member'>{'@' + member.username}</li>)}
             </div>
         
             <Modal 
@@ -104,7 +104,7 @@ const Page = (props) => {
                     className="close-button" 
                     onClick={closeModal}
                     size={20}
-                    style={{float: 'right', color: 'white', backgroundColor: 'red'}}
+                    style={{float: 'right', color: 'white', background: 'red'}}
                 />
                 <form onSubmit={handleSubmit}>
                     <input name="title" style={{marginTop: '40px', height: '40px', fontSize: '18px'}}
@@ -123,7 +123,7 @@ const Page = (props) => {
                     <Category/>
                     
                     <button type="submit" 
-                        style={{margin: '10px 0 0 75%', backgroundColor: 'green', height: '40px', width: '80px'}}
+                        style={{margin: '10px 0 0 75%', background: 'green', height: '40px', width: '80px'}}
                     >SUBMIT</button> 
                 </form>
             </Modal>

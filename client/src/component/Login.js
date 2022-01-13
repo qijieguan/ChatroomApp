@@ -27,6 +27,7 @@ export default function Login() {
 
     const [username, setUsername] = useState("Guest");
     const [password, setPassword] = useState("password");
+    const [url, setURL] = useState("");
     const [error, setError] = useState(false);
     const [message, setMessage] = useState("");
     const [id, setUID] = useState(-1);
@@ -48,7 +49,7 @@ export default function Login() {
             setError(true);
             return;
         }
-        axios.post('/api/login', {
+        axios.post('http://localhost:3001/api/login', {
             username: username,
             password: password  
         }).then((response) => {
@@ -60,6 +61,7 @@ export default function Login() {
                 localStorage.setItem("token", response.data.token);
             }
             setUID(response.data.userID);
+            setURL(response.data.url);
             setMessage(response.data.message);
             setError(response.data.error);
         }); 
@@ -75,7 +77,7 @@ export default function Login() {
     };
 
     const userAuthentication = () => {
-        axios.get('/api/auth', {
+        axios.get('http://localhost:3001/api/auth', {
             headers: {
                 "x-access-token": localStorage.getItem("token")
             }
@@ -84,8 +86,9 @@ export default function Login() {
                 localStorage.setItem("isLogged", true);
                 localStorage.setItem("user", username);
                 localStorage.setItem("userID", id);
+                localStorage.setItem("url", url);
                 setMessage(response.data.message);
-                axios.post('/api/load', {
+                axios.post('http://localhost:3001/api/load', {
                     userID: id,
                 }).then((response) => {
                     console.log(response.data)
@@ -125,17 +128,14 @@ export default function Login() {
                     onChange={handleChange} 
                     style={{marginBottom: '10px', height: '40px'}} 
                 ></input>
-                <Link to='/register' style={{color: 'blue'}}>Register</Link>
-                <button type="submit" 
-                    className="btn waves-effect green" 
-                    style={{width: '90%', height: '50px', color: 'white', backgroundColor: 'green'}}
-                >LOGIN</button>
+                <Link to='/register' style={{color: 'blue', fontSize: '16px'}}>Register</Link>
+                <button type="submit" className="submit-btn" style={{background: 'yellowgreen'}}>LOGIN</button>
                 <Modal isOpen={modal} style={modalStyles}>
                     <AiFillCloseSquare
                         className="close-button" 
                         onClick={closeModal}
-                        size={20}
-                        style={{alignSelf: 'flex-end', color: 'white', backgroundColor: 'red'}}
+                        size={24}
+                        style={{alignSelf: 'flex-end', color: 'red'}}
                     />
                     <button className="authenticate-btn" onClick={userAuthentication}>
                         Click to Authenticate

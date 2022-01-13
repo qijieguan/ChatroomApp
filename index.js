@@ -4,13 +4,14 @@ const mysql = require("mysql");
 const path  =  require('path');
 const cors = require('cors');
 require('dotenv').config();
+bodyParser = require('body-parser');
+
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 app.use(cors());
-
 app.use(express.json()); 
 
 const db = mysql.createConnection({ 
@@ -20,11 +21,12 @@ const db = mysql.createConnection({
     database: process.env.DATABASE_VAL 
 }); 
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.post('/api/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    const image_url = req.body.image_url;
     db.query("SELECT * FROM user WHERE username = ?",
         username,
         (err, result) => {
@@ -40,8 +42,8 @@ app.post('/api/register', (req, res) => {
                         console.log(err);
                     }
                     else {    
-                        db.query("INSERT INTO user (username, password) VALUES (?,?)",
-                            [username, hash],
+                        db.query("INSERT INTO user (username, password, image_url) VALUES (?,?,?)",
+                            [username, hash, image_url],
                             (err, result) => {
                                 if (err) {
                                     console.log(err);
@@ -94,10 +96,11 @@ app.post('/api/login', (req, res) => {
                 bcrypt.compare(password, result[0].password, (err, response) => {
                     if (response) {
                         const id = result[0].id;
+                        const url = result[0].image_url;
                         const token = jwt.sign({id}, process.env.JWT_SECRET, 
                             {expiresIn: 300}
                         );
-                        res.send({message: "Ready to Authenticate", userID: id ,token: token, error: false});
+                        res.send({message: "Ready to Authenticate", userID: id, url: url, token: token, error: false});
                     }
                     else {
                         res.send({message: "Invalid username/password combination!", error: true});
@@ -212,13 +215,13 @@ app.post('/api/load_members', (req, res) => {
                 console.log(err);
             }
             let parsedUID = result[0].users_by_id.split('*');
-            db.query("SELECT username from user WHERE id = ? OR id = ?",
+            db.query("SELECT * from user WHERE id = ? OR id = ?",
             [parsedUID[0], parsedUID[1]],
             (err, result) => {
                 if (err) {
                     console.log(err);
                 }
-                res.send(result);
+                console.log(result[0]);
             }
         );
         }    
@@ -341,9 +344,11 @@ app.post('/api/comment/delete', (req, res) => {
     );
 });
 
+/*
 app.get('*', (req, res) => {
    res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
+*/
 
 const PORT = process.env.PORT || 3001;
 

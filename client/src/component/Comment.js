@@ -10,7 +10,7 @@ const Comment = ({ comment, topicID }) => {
     const [dislikes, setDislikes] = useState(0);
 
     const updateLikes = () => {
-        axios.post('api/rate/like', {
+        axios.post('http://localhost:3001/api/rate/like', {
             userID: localStorage.getItem("userID"),
             topicID: topicID
         }).then((response) => {
@@ -19,7 +19,7 @@ const Comment = ({ comment, topicID }) => {
     };
 
     const updateDislikes = () => {
-        axios.post('/api/rate/dislike', {
+        axios.post('http://localhost:3001/api/rate/dislike', {
             userID: localStorage.getItem("userID"),
             topicID: topicID
         }).then((response) => {
@@ -28,7 +28,7 @@ const Comment = ({ comment, topicID }) => {
     };
 
     const handleDelete = () => {
-        axios.post('/api/comment/delete', {
+        axios.post('http://localhost:3001/api/comment/delete', {
             commentID: comment.id
         });
         document.getElementById(comment.id).remove();
@@ -37,16 +37,16 @@ const Comment = ({ comment, topicID }) => {
     return(
         <div className="comment" id={comment.id}>
             <div className="comment-content">
-                <div className="comment-body">
+                <div className="comment-body" style={{color: 'black'}}>
                     {comment.comment}
                 </div>
                 <div className="comment-footing">
                     <div>Post by: <span style={{color: 'green'}}>{"@" + comment.made_by}</span></div>
                     <div style={{display: 'flex'}}>
-                        <MdThumbUp onClick={updateLikes} size={24} color='red'/>
-                        <div style={{marginRight: '20px'}}>{likes}</div>
-                        <MdThumbDown onClick={updateDislikes} size={24} color='blue'/>
-                        <div>{dislikes}</div>
+                        <MdThumbUp onClick={updateLikes} size={24} color='firebrick'/>
+                        <div style={{marginRight: '20px', color: 'firebrick'}}>{likes}</div>
+                        <MdThumbDown onClick={updateDislikes} size={24} color='navy'/>
+                        <div style={{color: 'navy'}}>{dislikes}</div>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ const Expand = (props) => {
     const [update, setUpdate] = useState(false);
 
     useEffect (() => {
-        axios.post('/api/load_comment', {
+        axios.post('http://localhost:3001/api/load_comment', {
             topic_id: props.match.params.id
         }).then((response) => {
             if (response.data) {
@@ -26,7 +26,7 @@ const Expand = (props) => {
     const handleSubmit = event => {
         event.preventDefault();
         if (!comment) {return;}
-        axios.post('/api/post_comment', {
+        axios.post('http://localhost:3001/api/post_comment', {
             comment: comment,
             topic_id: props.match.params.id,
             user: localStorage.getItem("user")
@@ -46,7 +46,7 @@ const Expand = (props) => {
                 </div>
                 <div style={{color: 'green', marginLeft: '75%'}}>@{useLocation().state.topic.made_by}</div>
             </div>
-            <label className="comment-label">COMMENTS</label>
+            <div className="comment-label">COMMENTS</div>
             <div className="comment-list">
                 {commentList.length > 0 ? commentList.map(comment =>
                     <Comment key={comment.id} comment={comment} topicID={props.match.params.id}/>
@@ -61,7 +61,7 @@ const Expand = (props) => {
                     value= {comment}
                     placeholder="Write your reply..."/>
                 <button 
-                    style={{height: '60px', width: '60px', color: 'white', backgroundColor: 'green'}} 
+                    style={{height: '60px', width: '60px', color: 'white', background: 'green'}} 
                     onClick={handleSubmit}
                 >Enter</button>
             </div>

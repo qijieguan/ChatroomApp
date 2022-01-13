@@ -5,12 +5,13 @@ import { AiOutlineMenuFold } from 'react-icons/ai';
 
 
 const Menu = () => {
-
+    
+    const url = localStorage.getItem("url");
     const [Rooms, setRooms] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem("myRooms")) {
-            axios.post('/api/load', {
+            axios.post('http://localhost:3001/api/load', {
                 userID: localStorage.getItem("userID")
             }).then((response) => {
                 if (response.data) {
@@ -19,7 +20,7 @@ const Menu = () => {
                 }
             });
         };
-    }, [])
+    }, []);
 
     return (
         <div style={{width: '20%'}}>
@@ -32,6 +33,10 @@ const Menu = () => {
                         style={{float: 'left', marginLeft: '40px'}}
                     />
                     <nav className="nav-panel">
+                        <div className='profile'>
+                            <img src={url} className='profile-img' alt=""/>
+                            <div className='profile-name'>{localStorage.getItem("user")}</div>
+                        </div>
                         <Link to="/create" className='nav-li'>Create Classroom</Link>
                         <Link to="/join" className='nav-li'>Join Classroom</Link>
                         <label className="room-label">- - - - - - - Own - - - - - - -</label>

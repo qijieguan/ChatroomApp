@@ -20,7 +20,7 @@ export default function Create () {
             console.log("Missing input!")
             return;
         }
-        axios.post('/api/create', {
+        axios.post('http://localhost:3001/api/create', {
             host: localStorage.getItem('user'),
             subject: subject,
             desc: desc,
@@ -39,7 +39,7 @@ export default function Create () {
             <input 
                 name="host"
                 defaultValue={localStorage.getItem("user")}
-                style = {{pointerEvents: 'none', backgroundColor: 'rgb(230, 230, 230)'}}
+                style = {{pointerEvents: 'none', background: 'rgb(230, 230, 230)'}}
             />
 
             <label>Subject<span style={{color: 'red'}}>*</span></label>
@@ -87,5 +87,5 @@ const submitStyle = {
     height: '80px', 
     width: '70%', 
     color: 'white',
-    backgroundColor: 'navy', 
+    background: 'navy', 
 }
