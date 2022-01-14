@@ -20,6 +20,7 @@ export default function Login() {
         height: '35%',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)', 
+        zIndex: '4'
         }
     };
 
@@ -61,7 +62,10 @@ export default function Login() {
         }); 
     }
 
-    const openModal = () => {setModal(true);}
+    const openModal = () => {
+        setModal(true);
+        document.getElementsByClassName('login-form')[0].style.zIndex = 0;
+    }
 
     const closeModal = () => {
         setMessage("");
@@ -94,7 +98,7 @@ export default function Login() {
     }
 
     return (
-        <div className="login-container">
+        <div className="home login-container">
             <form className="login-form" onSubmit={handleSubmit}>
                 <label className='login-label'>Login</label>
                 <div className='error-msg'
@@ -102,7 +106,7 @@ export default function Login() {
                         color: error ? 'red' : 'goldenrod', 
                         display: message ? '' : 'none',
                         marginBottom: '20px', 
-                        fontSize: '16px'
+                        fontSize: '16px',
                     }}
                 >{message}</div>
                 <input name="username" style={{marginBottom: '10px', height: '40px'}} 
@@ -118,14 +122,14 @@ export default function Login() {
                 
                 <Link to='/register' style={{color: 'blue', fontSize: '16px'}}>Register</Link>
                 <button type="submit" className="submit-btn" style={{background: 'yellowgreen'}}>LOGIN</button>
-                <Modal isOpen={modal} style={modalStyles}>
-                    <AiFillCloseSquare className="close-button" style={{alignSelf: 'flex-end', color: 'red'}}
-                        onClick={closeModal}
-                        size={24}
-                    />
-                    <button className="authenticate-btn" onClick={userAuthentication}>Click to Authenticate</button> 
-                </Modal>
             </form>      
+            <Modal isOpen={modal} style={modalStyles}>
+                <AiFillCloseSquare className="close-button" style={{alignSelf: 'flex-end', color: 'red'}}
+                    onClick={closeModal}
+                    size={24}
+                />
+                <button className="authenticate-btn" onClick={userAuthentication}>Click to Authenticate</button> 
+            </Modal>
         </div>
     );
 }

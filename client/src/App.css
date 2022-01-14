@@ -35,7 +35,7 @@
   transition: transform 0.5s ease-in;
   border-bottom-right-radius: 10px;
   box-shadow: 1px 2px 3px black;
-  z-index: 2;
+  z-index: 3;
 }
 
 .menu-icon:hover .nav-panel {
@@ -108,40 +108,49 @@
 }
 
 .home {
+  position: relative;
   min-height: 700px;
-  background: blue;
-  pointer-events: none;
+  background-image: url("https://images.pexels.com/photos/5466284/pexels-photo-5466284.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.4;
+  z-index: 1;
 }
 
 .intro {
+  position: absolute;
   float: left;
   margin: 140px 0 0 120px;
   width: 500px;
   font-size: 50px;
   color: white;
   animation: fadeIn 3s linear infinite alternate;
+  z-index: 2;
 }
 
 .discussion-icon {
-  margin-top: 10%;
+  position: absolute;
+  margin: 10% 0 0 5%;
   color: white;
   animation: fadeIn 3s linear infinite alternate;
-  pointer-events: auto;
-}
-
-.home:hover {
-  background: yellowgreen;
+  z-index: 3;
 }
 
 .login-container, .register-container {
   display: flex;
+
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-top: 80px;
   min-height: 500px;
   width: 450px;
   font-weight: bolder;
@@ -149,6 +158,7 @@
   border: 1px border grey;
   border-radius: 10px;
   box-shadow: 2px 5px 6px rgb(131, 206, 20), -1px -2px 4px rgb(131, 206, 20);
+  z-index: 2;
 }
 
 .login-label {
@@ -616,16 +626,10 @@ a {
 
 @keyframes fadeIn {
   0% {
-    opacity: 1;
-    color: white;  
-  }
-  50% {
-    opacity: 0.5;
-    color: limegreen;
+    opacity: 0; 
   }
   100% {
-    opacity: 0;
-    color: orange;
+    opacity: 1;
   }
 }
 
@@ -655,4 +659,5 @@ a {
     color: orange;
   }
 }
+
 
