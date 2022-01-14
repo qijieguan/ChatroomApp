@@ -30,24 +30,18 @@ app.post('/api/register', (req, res) => {
     db.query("SELECT * FROM user WHERE username = ?",
         username,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             if (result.length > 0) {
                 res.send({message: "Username already taken!", error: true});
             }
             else {
                 bcrypt.hash(password, saltRounds, (err, hash) => {
-                    if (err) {
-                        console.log(err);
-                    }
+                    if (err) {console.log(err);}
                     else {    
                         db.query("INSERT INTO user (username, password, image_url) VALUES (?,?,?)",
                             [username, hash, image_url],
                             (err, result) => {
-                                if (err) {
-                                    console.log(err);
-                                }
+                                if (err) {console.log(err);}
                             }
                         );
                         res.send({message: "User is successfully registered", error: false});
@@ -86,9 +80,7 @@ app.post('/api/login', (req, res) => {
     db.query("SELECT * FROM user WHERE username = ?",
         username,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             if (result.length <= 0) {
                 res.send({message: "Invalid username!", error: true});
             }
@@ -116,9 +108,7 @@ app.post('/api/load', (req, res) => {
     let getRoom = [];
     db.query("SELECT * from room", 
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             for(i = 0; i < result.length; ++i) {
                 let parsedUID = result[i].users_by_id.split('*');
                 for (j = 0; j < parsedUID.length; ++j) {
@@ -143,9 +133,7 @@ app.post('/api/create', (req, res) => {
         "INSERT INTO room (host, subject, description, privacy, size, users_by_id) VALUES (?,?,?,?,?,?)",
         [host, subject, desc, privacy, 1, users_by_id],
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send("Room is successfully created!");
         }
     );
@@ -155,9 +143,7 @@ app.get('/api/join', (req, res) => {
     db.query("SELECT * from room WHERE privacy = ?",
         "public",
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send(result);
         }
     );
@@ -169,9 +155,7 @@ app.post('/api/join', (req, res) => {
     db.query("UPDATE room SET users_by_id = CONCAT(users_by_id, ?) WHERE id = ?",
         [userID, roomID],
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send("Joined room successfully!");
         }
     );
@@ -182,9 +166,7 @@ app.post('/api/load_topic', (req, res) => {
     db.query("SELECT * from topic WHERE room_id = ?",
         roomID,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send(result);
         }    
     )
@@ -198,9 +180,7 @@ app.post('/api/post_topic', (req, res) => {
     db.query("INSERT INTO topic (title, detail, room_id, made_by) VALUES (?,?,?,?)",
         [title, detail, room_id, user],
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send("Topic posted successfully!");
         }
     );
@@ -211,17 +191,13 @@ app.post('/api/load_members', (req, res) => {
     db.query("SELECT users_by_id from room WHERE id = ?",
         roomID,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             let parsedUID = result[0].users_by_id.split('*');
-            db.query("SELECT * from user WHERE id = ? OR id = ?",
+            db.query("SELECT username from user WHERE id = ? OR id = ?",
             [parsedUID[0], parsedUID[1]],
             (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.log(result[0]);
+                if (err) {console.log(err);}
+                res.send(result);
             }
         );
         }    
@@ -233,9 +209,7 @@ app.post('/api/load_comment', (req, res) => {
     db.query("SELECT * from comment WHERE topic_id = ?",
         topic_id,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send(result);
         }
     );
@@ -248,9 +222,7 @@ app.post('/api/post_comment', (req, res) => {
     db.query("INSERT INTO comment (comment, likes_by_id, dislikes_by_id, topic_id, made_by, likes, dislikes) VALUES (?,?,?,?,?,?,?)",
         [comment, "", "", topic_id, user, 0, 0],
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             res.send("Comment posted successfully!");
         }
     );
@@ -258,13 +230,11 @@ app.post('/api/post_comment', (req, res) => {
 
 app.post('/api/rate/like', (req, res) => {
     const userID = req.body.userID;
-    const topicID = req.body.topicID;
-    db.query("SELECT * from comment WHERE topic_id = ?",
-        topicID,
+    const commentID = req.body.commentID;
+    db.query("SELECT * from comment WHERE id = ?",
+        commentID,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             let parsedUID = result[0].likes_by_id.split('*');
             let likeCount = result[0].likes;
             if (parsedUID.length == 1 && parsedUID[0] == '') {
@@ -284,9 +254,7 @@ app.post('/api/rate/like', (req, res) => {
             db.query("UPDATE comment SET likes_by_id = ?, likes = ? WHERE id = ?",
                 [likes_by_id, likeCount, result[0].id],
                 (err, result) => { 
-                    if (err) {
-                        console.log(err);
-                    }
+                    if (err) {console.log(err);}
                     res.send({msg: "Ratings updated!", likes: likeCount})
                 }
             );
@@ -296,13 +264,11 @@ app.post('/api/rate/like', (req, res) => {
 
 app.post('/api/rate/dislike', (req, res) => {
     const userID = req.body.userID;
-    const topicID = req.body.topicID;
-    db.query("SELECT * from comment WHERE topic_id = ?",
-        topicID,
+    const commentID = req.body.commentID;
+    db.query("SELECT * from comment WHERE id = ?",
+        commentID,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
             let parsedUID = result[0].dislikes_by_id.split('*');
             let dislikeCount = result[0].dislikes;
             if (parsedUID.length == 1 && parsedUID[0] == '') {
@@ -322,9 +288,7 @@ app.post('/api/rate/dislike', (req, res) => {
             db.query("UPDATE comment SET dislikes_by_id = ?, dislikes = ? WHERE id = ?",
                 [dislikes_by_id, dislikeCount, result[0].id],
                 (err, result) => {
-                    if (err) {
-                        console.log(err);
-                    }
+                    if (err) {console.log(err);}
                     res.send({msg: "Ratings updated!", dislikes: dislikeCount})
                 }
             );
@@ -337,21 +301,15 @@ app.post('/api/comment/delete', (req, res) => {
     db.query("DELETE from comment WHERE id = ?",
         commentID,
         (err, result) => {
-            if (err) {
-                console.log(err);
-            }
+            if (err) {console.log(err);}
         }
     );
 });
 
 /*
-app.get('*', (req, res) => {
-   res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+app.get('*', (req, res) => {res.sendFile(path.join(__dirname+'/client/build/index.html'));});
 */
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => {
-    console.log(`server running on ${PORT}`);
-});
+app.listen(PORT, () => {console.log(`server running on ${PORT}`);});

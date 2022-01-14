@@ -13,15 +13,11 @@ const Expand = (props) => {
         axios.post('http://localhost:3001/api/load_comment', {
             topic_id: props.match.params.id
         }).then((response) => {
-            if (response.data) {
-                setCommentList(response.data);
-            }
+            if (response.data) {setCommentList(response.data);}
         });
     }, [props.match.params.id, update]);
 
-    const handleChange = event => {
-        setComment(event.target.value);
-    }
+    const handleChange = event => {setComment(event.target.value);}
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -37,13 +33,9 @@ const Expand = (props) => {
 
     return (
         <div className="topic-expand">
-            <div className="topic-title">
-                {useLocation().state.topic.title}
-            </div>
+            <div className="topic-title">{useLocation().state.topic.title}</div>
             <div className="topic-detail">
-                <div style={{marginBottom: '10px', minHeight: '80px'}}>
-                    {useLocation().state.topic.detail}
-                </div>
+                <div style={{marginBottom: '10px', minHeight: '80px'}}>{useLocation().state.topic.detail}</div>
                 <div style={{color: 'green', marginLeft: '75%'}}>@{useLocation().state.topic.made_by}</div>
             </div>
             <div className="comment-label">COMMENTS</div>
@@ -60,8 +52,7 @@ const Expand = (props) => {
                     onChange={handleChange} 
                     value= {comment}
                     placeholder="Write your reply..."/>
-                <button 
-                    style={{height: '60px', width: '60px', color: 'white', background: 'green'}} 
+                <button style={{height: '60px', width: '60px', color: 'white', background: 'green'}} 
                     onClick={handleSubmit}
                 >Enter</button>
             </div>

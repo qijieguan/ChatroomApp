@@ -8,15 +8,11 @@ export default function Join() {
     let filterMyRooms = (joinedRooms, publicRooms) => {
         for (let i = 0; i < joinedRooms.length; ++i) {
             for (let j = 0; j < publicRooms.length; ++j) {
-                if (joinedRooms[i].id === publicRooms[j].id) {
-                    publicRooms.splice(j, 1);
-                    console.log(publicRooms[j]);
-                }
+                if (joinedRooms[i].id === publicRooms[j].id) {publicRooms.splice(j, 1);}
             }
         } 
         return publicRooms; 
     }
-    
     
     useEffect(() => { 
         axios.get('http://localhost:3001/api/join').then((response) => {
@@ -27,7 +23,7 @@ export default function Join() {
                 setRoomList(publicRooms);
             }
         });         
-    }, [RoomList]);
+    }, []);
 
     const joinRoom = (room_id) => {
         axios.post('http://localhost:3001/api/join', {
@@ -35,6 +31,7 @@ export default function Join() {
             roomID: room_id
         }).then((response) => {
             setRoomList((RoomList.filter(data => data.id !== room_id)));
+            window.location.href="/dashboard"
         });
     };
 

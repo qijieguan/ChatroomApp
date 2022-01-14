@@ -16,12 +16,8 @@ export default function Register() {
     const [error, setError] = useState("");
 
     const handleChange = event => {
-        if (event.target.name === "username") {
-            setUsername(event.target.value);
-        }
-        else {
-            setPassword(event.target.value);
-        }   
+        if (event.target.name === "username") {setUsername(event.target.value);}
+        else {setPassword(event.target.value);}   
     }
 
     const readFiles = (files) => {

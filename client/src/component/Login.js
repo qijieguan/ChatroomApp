@@ -34,12 +34,8 @@ export default function Login() {
     const [modal, setModal] = useState(false);
 
     const handleChange = event => {
-        if (event.target.name === "username") {
-            setUsername(event.target.value);
-        }
-        else {
-            setPassword(event.target.value);
-        }   
+        if (event.target.name === "username") {setUsername(event.target.value);}
+        else {setPassword(event.target.value);}   
     }
 
     const handleSubmit = event => {
@@ -53,9 +49,7 @@ export default function Login() {
             username: username,
             password: password  
         }).then((response) => {
-            if (response.data.error) {
-                setError(true);
-            }
+            if (response.data.error) {setError(true);}
             else {
                 openModal();
                 localStorage.setItem("token", response.data.token);
@@ -67,9 +61,7 @@ export default function Login() {
         }); 
     }
 
-    const openModal = () => {
-        setModal(true);
-    }
+    const openModal = () => {setModal(true);}
 
     const closeModal = () => {
         setMessage("");
@@ -95,7 +87,7 @@ export default function Login() {
                     if (response.data) {
                         localStorage.setItem("myRooms", JSON.stringify(response.data));
                     }
-                    window.location.href="/";
+                    window.location.href="/dashboard";
                 });
             }
         });
@@ -113,36 +105,27 @@ export default function Login() {
                         fontSize: '16px'
                     }}
                 >{message}</div>
-                <input 
-                    name="username"
+                <input name="username" style={{marginBottom: '10px', height: '40px'}} 
                     value={username} 
                     placeholder="Enter username"
                     onChange={handleChange}
-                    style={{marginBottom: '10px', height: '40px'}} 
                 ></input>
-                <input 
-                    name="password"
-                    type="password"
+                <input name="password" type="password" style={{marginBottom: '10px', height: '40px'}} 
                     value={password}
                     placeholder="Enter password"
                     onChange={handleChange} 
-                    style={{marginBottom: '10px', height: '40px'}} 
                 ></input>
+                
                 <Link to='/register' style={{color: 'blue', fontSize: '16px'}}>Register</Link>
                 <button type="submit" className="submit-btn" style={{background: 'yellowgreen'}}>LOGIN</button>
                 <Modal isOpen={modal} style={modalStyles}>
-                    <AiFillCloseSquare
-                        className="close-button" 
+                    <AiFillCloseSquare className="close-button" style={{alignSelf: 'flex-end', color: 'red'}}
                         onClick={closeModal}
                         size={24}
-                        style={{alignSelf: 'flex-end', color: 'red'}}
                     />
-                    <button className="authenticate-btn" onClick={userAuthentication}>
-                        Click to Authenticate
-                    </button> 
+                    <button className="authenticate-btn" onClick={userAuthentication}>Click to Authenticate</button> 
                 </Modal>
-            </form>
-            
+            </form>      
         </div>
     );
 }

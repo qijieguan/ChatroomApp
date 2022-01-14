@@ -3,24 +3,18 @@ import Menu from './Menu.js';
 
 export default function Nav () {
     
-    const logout = () => {
-      localStorage.clear();
-      window.location.href='/login';
-    };
-  
     return (
         <div>
             <header className = "nav-bar">
                     <Menu/>
-                    <div className="logo">Topic Road</div>
-                    <nav className="nav-links">     
-                        <Link to="/">Home</Link>
-                        {localStorage.getItem("isLogged") ?
-                            <Link onClick={logout} to="/" className="logout">Logout</Link>
-                        :
+                    <h1 className="logo">Topic Road</h1>
+                    {!localStorage.getItem("isLogged") ?
+                        <nav className="nav-links">   
+                            <Link to="/">Home</Link>
                             <Link to="/login" className="login">Login</Link>
-                        }
-                    </nav>
+                        </nav>
+                        : <div className='nav-links'/>
+                    }
             </header>
         </div>
     );

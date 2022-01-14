@@ -33,22 +33,16 @@ const Page = (props) => {
     useEffect(() => {
         axios.post('http://localhost:3001/api/load_topic', {
             roomID: props.match.params.id
-        }).then((response) => {
-            setTopics(response.data);
-        });
+        }).then((response) => {setTopics(response.data);});
 
         axios.post('http://localhost:3001/api/load_members', {
             roomID: props.match.params.id
-        }).then((response) => {
-            setMembers(response.data);
-        });
+        }).then((response) => {setMembers(response.data);});
     }, [props.match.params.id, update]);
 
     Modal.setAppElement(document.getElementById('root'));
 
-    const openModal = () => {
-        setModal(true);
-    }
+    const openModal = () => {setModal(true);}
 
     const closeModal = () => {
         setTitle("");
@@ -57,12 +51,8 @@ const Page = (props) => {
     }
 
     const handleChange = event => {
-        if (event.target.name === "title") {
-            setTitle(event.target.value);
-        }
-        else {
-            setDetail(event.target.value);
-        }
+        if (event.target.name === "title") {setTitle(event.target.value);}
+        else {setDetail(event.target.value);}
     };
 
     const handleSubmit = event => {
@@ -90,21 +80,19 @@ const Page = (props) => {
                     <div style={{textAlign: 'center', fontSize: '30px'}}>There are no topics currently</div>
                 }
             </div>
-            <div className="page-features">
-                <button className="post-btn" onClick={openModal}>Post</button>
-                <div className="member-label">Members</div>
-                {members.map(member => <li key={uuid()} className='member'>{'@' + member.username}</li>)}
+            <div className="page-side">
+                <div className="post-btn" onClick={openModal}>Post</div>
+                <div className='member-list'>
+                    <div className="member-label">Members</div>
+                    {members.map(member => <li key={uuid()} className='member'>{'@' + member.username}</li>)}
+                </div>
             </div>
         
-            <Modal 
-                isOpen={modal} style={modalStyles}
-            >
+            <Modal isOpen={modal} style={modalStyles}>
                 <label style={{color: 'green', fontSize: '30px'}}>CREATE A TOPIC</label>
-                <AiFillCloseSquare
-                    className="close-button" 
+                <AiFillCloseSquare className="close-button" style={{float: 'right', color: 'white', background: 'red'}}
                     onClick={closeModal}
                     size={20}
-                    style={{float: 'right', color: 'white', background: 'red'}}
                 />
                 <form onSubmit={handleSubmit}>
                     <input name="title" style={{marginTop: '40px', height: '40px', fontSize: '18px'}}
@@ -120,8 +108,9 @@ const Page = (props) => {
                     <label style={{display: 'block', fontSize: '24px', color: 'black', margin: '40px 0 10px 0'}}>
                         Pick one to represent topic<span style={{color: 'red', fontSize: '24px'}}>*</span>
                     </label>
-                    <Category/>
                     
+                    <Category/>
+            
                     <button type="submit" 
                         style={{margin: '10px 0 0 75%', background: 'green', height: '40px', width: '80px'}}
                     >SUBMIT</button> 

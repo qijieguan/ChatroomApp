@@ -6,13 +6,13 @@ import { useState } from 'react';
 
 const Comment = ({ comment, topicID }) => {
 
-    const [likes, setLikes] = useState(0);
-    const [dislikes, setDislikes] = useState(0);
+    const [likes, setLikes] = useState(comment.likes);
+    const [dislikes, setDislikes] = useState(comment.dislikes);
 
     const updateLikes = () => {
         axios.post('http://localhost:3001/api/rate/like', {
             userID: localStorage.getItem("userID"),
-            topicID: topicID
+            commentID: comment.id
         }).then((response) => {
             setLikes(response.data.likes);
         });
@@ -21,7 +21,7 @@ const Comment = ({ comment, topicID }) => {
     const updateDislikes = () => {
         axios.post('http://localhost:3001/api/rate/dislike', {
             userID: localStorage.getItem("userID"),
-            topicID: topicID
+            commentID: comment.id
         }).then((response) => {
             setDislikes(response.data.dislikes);
         });
@@ -37,9 +37,7 @@ const Comment = ({ comment, topicID }) => {
     return(
         <div className="comment" id={comment.id}>
             <div className="comment-content">
-                <div className="comment-body" style={{color: 'black'}}>
-                    {comment.comment}
-                </div>
+                <div className="comment-body" style={{color: 'black'}}>{comment.comment}</div>
                 <div className="comment-footing">
                     <div>Post by: <span style={{color: 'green'}}>{"@" + comment.made_by}</span></div>
                     <div style={{display: 'flex'}}>
