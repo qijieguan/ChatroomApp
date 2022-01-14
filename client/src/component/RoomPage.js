@@ -31,11 +31,11 @@ const Page = (props) => {
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-        axios.post('http://localhost:3001/api/load_topic', {
+        axios.post('/api/load_topic', {
             roomID: props.match.params.id
         }).then((response) => {setTopics(response.data);});
 
-        axios.post('http://localhost:3001/api/load_members', {
+        axios.post('/api/load_members', {
             roomID: props.match.params.id
         }).then((response) => {setMembers(response.data);});
     }, [props.match.params.id, update]);
@@ -58,7 +58,7 @@ const Page = (props) => {
     const handleSubmit = event => {
         event.preventDefault();
         if (!title) {return;}
-        axios.post('http://localhost:3001/api/post_topic', {
+        axios.post('/api/post_topic', {
             title: title,
             detail: detail,
             room_id: props.match.params.id,
@@ -84,7 +84,10 @@ const Page = (props) => {
                 <div className="post-btn" onClick={openModal}>Post</div>
                 <div className='member-list'>
                     <div className="member-label">Members</div>
-                    {members.map(member => <li key={uuid()} className='member'>{'@' + member.username}</li>)}
+                    {members.map(member => <li key={uuid()} className='member'>
+                        <img src={member.image_url} className='member-img' alt="">{}</img>
+                        <div className='member-name'>{'@' + member.username}</div>
+                    </li>)}
                 </div>
             </div>
         

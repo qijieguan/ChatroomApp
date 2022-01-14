@@ -10,7 +10,7 @@ const Expand = (props) => {
     const [update, setUpdate] = useState(false);
 
     useEffect (() => {
-        axios.post('http://localhost:3001/api/load_comment', {
+        axios.post('/api/load_comment', {
             topic_id: props.match.params.id
         }).then((response) => {
             if (response.data) {setCommentList(response.data);}
@@ -22,7 +22,7 @@ const Expand = (props) => {
     const handleSubmit = event => {
         event.preventDefault();
         if (!comment) {return;}
-        axios.post('http://localhost:3001/api/post_comment', {
+        axios.post('/api/post_comment', {
             comment: comment,
             topic_id: props.match.params.id,
             user: localStorage.getItem("user")

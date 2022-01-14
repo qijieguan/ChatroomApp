@@ -8,7 +8,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (localStorage.getItem("myRooms")) {
-            axios.post('http://localhost:3001/api/load', {
+            axios.post('/api/load', {
                 userID: localStorage.getItem("userID")
             }).then((response) => {
                 if (response.data) {
@@ -26,12 +26,14 @@ export default function Dashboard() {
                 <h1 className='join-room' style={{marginLeft: '50px', background: 'orange'}}>Join Room</h1>
             </Link>
             {Rooms ? 
-                Rooms.map(room =>  
-                    <Link to={`/room/${room.id}`} key={room.id} className="my-room nav-li"
-                        onClick={() => {localStorage.setItem('currRoom', room.subject)}}>
-                        {room.subject}
-                    </Link>
-                )
+                <nav className='room-nav'>
+                    {Rooms.map(room =>  
+                        <Link to={`/room/${room.id}`} key={room.id} className="room-link"
+                            onClick={() => {localStorage.setItem('currRoom', room.subject)}}>
+                            {room.subject}
+                        </Link>
+                    )}
+                </nav>
             :''}
         </div>
     );

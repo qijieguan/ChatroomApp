@@ -43,7 +43,7 @@ export default function Register() {
             method: 'POST',
             body: data
         }).then(res => res.json()).then(json => {
-            axios.post('http://localhost:3001/api/register', {
+            axios.post('/api/register', {
             username: username,
             password: password,
             image_url: json.secure_url

@@ -45,7 +45,7 @@ export default function Login() {
             setError(true);
             return;
         }
-        axios.post('http://localhost:3001/api/login', {
+        axios.post('/api/login', {
             username: username,
             password: password  
         }).then((response) => {
@@ -69,7 +69,7 @@ export default function Login() {
     };
 
     const userAuthentication = () => {
-        axios.get('http://localhost:3001/api/auth', {
+        axios.get('/api/auth', {
             headers: {
                 "x-access-token": localStorage.getItem("token")
             }
@@ -80,7 +80,7 @@ export default function Login() {
                 localStorage.setItem("userID", id);
                 localStorage.setItem("url", url);
                 setMessage(response.data.message);
-                axios.post('http://localhost:3001/api/load', {
+                axios.post('/api/load', {
                     userID: id,
                 }).then((response) => {
                     console.log(response.data)

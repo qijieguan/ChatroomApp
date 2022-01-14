@@ -21,7 +21,7 @@ const db = mysql.createConnection({
     database: process.env.DATABASE_VAL 
 }); 
 
-//app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.post('/api/register', (req, res) => {
     const username = req.body.username;
@@ -193,7 +193,7 @@ app.post('/api/load_members', (req, res) => {
         (err, result) => {
             if (err) {console.log(err);}
             let parsedUID = result[0].users_by_id.split('*');
-            db.query("SELECT username from user WHERE id = ? OR id = ?",
+            db.query("SELECT * from user WHERE id = ? OR id = ?",
             [parsedUID[0], parsedUID[1]],
             (err, result) => {
                 if (err) {console.log(err);}
@@ -306,9 +306,8 @@ app.post('/api/comment/delete', (req, res) => {
     );
 });
 
-/*
+
 app.get('*', (req, res) => {res.sendFile(path.join(__dirname+'/client/build/index.html'));});
-*/
 
 const PORT = process.env.PORT || 3001;
 
