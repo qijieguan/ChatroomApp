@@ -4,8 +4,6 @@ const mysql = require("mysql");
 const path  =  require('path');
 const cors = require('cors');
 require('dotenv').config();
-bodyParser = require('body-parser');
-
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
