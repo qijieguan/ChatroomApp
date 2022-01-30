@@ -33,6 +33,7 @@ export default function Login() {
     const [message, setMessage] = useState("");
     const [id, setUID] = useState(-1);
     const [modal, setModal] = useState(false);
+    const [token, setToken] = useState("");
 
     const handleChange = event => {
         if (event.target.name === "username") {setUsername(event.target.value);}
@@ -53,7 +54,7 @@ export default function Login() {
             if (response.data.error) {setError(true);}
             else {
                 openModal();
-                localStorage.setItem("token", response.data.token);
+                setToken(response.data.token);
             }
             setUID(response.data.userID);
             setURL(response.data.url);
@@ -70,13 +71,12 @@ export default function Login() {
     const closeModal = () => {
         setMessage("");
         setModal(false);
+        setToken("");
     };
 
     const userAuthentication = () => {
         axios.get('/api/auth', {
-            headers: {
-                "x-access-token": localStorage.getItem("token")
-            }
+            headers: { "x-access-token": token }
         }).then((response) => {
             if (response.data.auth) {
                 localStorage.setItem("isLogged", true);
@@ -87,12 +87,10 @@ export default function Login() {
                 axios.post('/api/load', {
                     userID: id,
                 }).then((response) => {
-                    console.log(response.data)
-                    if (response.data) {
-                        localStorage.setItem("myRooms", JSON.stringify(response.data));
-                    }
+                    if (response.data) { localStorage.setItem("myRooms", JSON.stringify(response.data)); }
                     window.location.href="/dashboard";
                 });
+                setToken("");
             }
         });
     }
