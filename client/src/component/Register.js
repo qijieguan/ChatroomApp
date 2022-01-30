@@ -38,7 +38,7 @@ export default function Register() {
         data.append('file', files[0]);
         data.append('upload_preset', process.env.REACT_APP_PRESET_NAME);
 
-        fetch(process.env.REACT_APP_IMAGE_URL + '/image/upload',
+        fetch(process.env.REACT_APP_IMAGE_URL + '/image/test',
         {
             method: 'POST',
             body: data
