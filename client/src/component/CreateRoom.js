@@ -17,11 +17,11 @@ export default function Create () {
             return;
         }
         axios.post('/api/create', {
-            host: localStorage.getItem('user'),
+            host: sessionStorage.getItem('user'),
             subject: subject,
             desc: desc,
             privacy: document.getElementById('privacy').value,
-            users_by_id: localStorage.getItem('userID')
+            users_by_id: sessionStorage.getItem('userID')
         });
         setSubject("");
         setDesc("");
@@ -33,7 +33,7 @@ export default function Create () {
 
             <label>Host</label>
             <input name="host"
-                defaultValue={localStorage.getItem("user")}
+                defaultValue={sessionStorage.getItem("user")}
                 style = {{pointerEvents: 'none', background: 'rgb(230, 230, 230)'}}
             />
 

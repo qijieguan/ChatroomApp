@@ -25,7 +25,7 @@ const Expand = (props) => {
         axios.post('/api/post_comment', {
             comment: comment,
             topic_id: props.match.params.id,
-            user: localStorage.getItem("user")
+            user: sessionStorage.getItem("user")
         });
         setComment("");
         setUpdate(!update);

@@ -8,7 +8,7 @@ export default function Nav () {
             <header className = "nav-bar">
                     <Menu/>
                     <h1 className="logo">Topic Road</h1>
-                    {!localStorage.getItem("isLogged") ?
+                    {!sessionStorage.getItem("isLogged") ?
                         <nav className="nav-links">   
                             <Link to="/">Home</Link>
                             <Link to="/login" className="login">Login</Link>

@@ -79,15 +79,15 @@ export default function Login() {
             headers: { "x-access-token": token }
         }).then((response) => {
             if (response.data.auth) {
-                localStorage.setItem("isLogged", true);
-                localStorage.setItem("user", username);
-                localStorage.setItem("userID", id);
-                localStorage.setItem("url", url);
+                sessionStorage.setItem("isLogged", true);
+                sessionStorage.setItem("user", username);
+                sessionStorage.setItem("userID", id);
+                sessionStorage.setItem("url", url);
                 setMessage(response.data.message);
                 axios.post('/api/load', {
                     userID: id,
                 }).then((response) => {
-                    if (response.data) { localStorage.setItem("myRooms", JSON.stringify(response.data)); }
+                    if (response.data) { sessionStorage.setItem("myRooms", JSON.stringify(response.data)); }
                     window.location.href="/dashboard";
                 });
                 setToken("");

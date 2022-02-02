@@ -7,12 +7,12 @@ export default function Dashboard() {
     const [Rooms, setRooms] = useState([]);
 
     useEffect(() => {
-        if (localStorage.getItem("myRooms")) {
+        if (sessionStorage.getItem("myRooms")) {
             axios.post('/api/load', {
-                userID: localStorage.getItem("userID")
+                userID: sessionStorage.getItem("userID")
             }).then((response) => {
                 if (response.data) {
-                    localStorage.setItem("myRooms", JSON.stringify(response.data));
+                    sessionStorage.setItem("myRooms", JSON.stringify(response.data));
                     setRooms(response.data);
                 }
             });
@@ -29,7 +29,7 @@ export default function Dashboard() {
                 <nav className='room-nav'>
                     {Rooms.map(room =>  
                         <Link to={`/room/${room.id}`} key={room.id} className="room-link"
-                            onClick={() => {localStorage.setItem('currRoom', room.subject)}}>
+                            onClick={() => {sessionStorage.setItem('currRoom', room.subject)}}>
                             {room.subject}
                         </Link>
                     )}

@@ -4,16 +4,16 @@ import { AiOutlineMenuFold } from 'react-icons/ai';
 
 const Menu = () => {
     
-    const url = localStorage.getItem("url");
+    const url = sessionStorage.getItem("url");
 
     const logout = () => {
-        localStorage.clear();
+        sessionStorage.clear();
         window.location.href='/login';
     };
 
     return (
         <div style={{width: '20%'}}>
-            {localStorage.getItem("isLogged")
+            {sessionStorage.getItem("isLogged")
                 ?
                 <div className="menu-icon" style={{float: 'center'}}>
                     <AiOutlineMenuFold
@@ -24,7 +24,7 @@ const Menu = () => {
                     <nav className="nav-panel">
                         <div className='profile'>
                             <img src={url} className='profile-img' alt=""/>
-                            <h1 className='profile-name'>{localStorage.getItem("user")}</h1>
+                            <h1 className='profile-name'>{sessionStorage.getItem("user")}</h1>
                         </div>
                         <Link to="/dashboard" className='nav-li dashboard'>Dashboard</Link>
                         <Link to="/" className="nav-li logout" onClick={logout}>Logout</Link>

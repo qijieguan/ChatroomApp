@@ -62,7 +62,7 @@ const Page = (props) => {
             title: title,
             detail: detail,
             room_id: props.match.params.id,
-            user: localStorage.getItem("user")
+            user: sessionStorage.getItem("user")
         });
         closeModal();
         setUpdate(!update);
@@ -71,7 +71,7 @@ const Page = (props) => {
     return (
         <div className="page-container">
             <div className="topic-section">
-                <label className='page-label'>{localStorage.getItem('currRoom')}</label>
+                <label className='page-label'>{sessionStorage.getItem('currRoom')}</label>
                 <label className="topic-label">Topics</label>
                 {topics.length > 0 ? topics.map(topic => 
                     <Topic key={topic.id} topic={topic} roomID={props.match.params.id}/>

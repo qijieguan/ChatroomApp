@@ -11,7 +11,7 @@ const Comment = ({ comment, topicID }) => {
 
     const updateLikes = () => {
         axios.post('/api/rate/like', {
-            userID: localStorage.getItem("userID"),
+            userID: sessionStorage.getItem("userID"),
             commentID: comment.id
         }).then((response) => {
             setLikes(response.data.likes);
@@ -20,7 +20,7 @@ const Comment = ({ comment, topicID }) => {
 
     const updateDislikes = () => {
         axios.post('/api/rate/dislike', {
-            userID: localStorage.getItem("userID"),
+            userID: sessionStorage.getItem("userID"),
             commentID: comment.id
         }).then((response) => {
             setDislikes(response.data.dislikes);
@@ -51,14 +51,14 @@ const Comment = ({ comment, topicID }) => {
             <div className="comment-icons">
                 <VscTrash onClick={handleDelete} 
                     style={{
-                        display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
+                        display: sessionStorage.getItem("user") === comment.made_by ? '' : 'none', 
                         fontSize: '24px', 
                         color: 'white'
                     }}
                 />
                 <FaRegEdit
                     style={{
-                        display: localStorage.getItem("user") === comment.made_by ? '' : 'none', 
+                        display: sessionStorage.getItem("user") === comment.made_by ? '' : 'none', 
                         fontSize: '20px', 
                         marginTop: '30px',
                         color: 'white'
