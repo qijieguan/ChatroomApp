@@ -3,7 +3,6 @@ import { GoCommentDiscussion } from 'react-icons/go';
 export default function Home() {
     return (
         <div className="home">
-            <div className='overlay'/>
             <p className="intro">
                 Welcome to my Q & A service! 
                 Discuss your topics here!

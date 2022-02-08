@@ -110,17 +110,8 @@
 .home {
   position: relative;
   min-height: 700px;
-  background-image: url("https://images.pexels.com/photos/5466284/pexels-photo-5466284.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-image: url("https://images.pexels.com/photos/1111369/pexels-photo-1111369.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
-}
-
-.overlay {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: black;
-  opacity: 0.4;
-  z-index: 1;
 }
 
 .intro {
