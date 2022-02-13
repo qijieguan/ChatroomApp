@@ -19,7 +19,7 @@ const db = mysql.createConnection({
     database: process.env.DATABASE_VAL 
 }); 
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.post('/api/register', (req, res) => {
     const username = req.body.username;
@@ -305,7 +305,7 @@ app.post('/api/comment/delete', (req, res) => {
 });
 
 
-app.get('*', (req, res) => {res.sendFile(path.join(__dirname+'/client/build/index.html'));});
+//app.get('*', (req, res) => {res.sendFile(path.join(__dirname+'/client/build/index.html'));});
 
 const PORT = process.env.PORT || 3001;
 

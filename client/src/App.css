@@ -86,18 +86,12 @@
   margin: 140px 0 0 120px;
   width: 500px;
   font-size: 50px;
-  color: green;
-  animation: fadeIn 3s linear infinite alternate;
-  z-index: 2;
-}
-
-.discussion-icon {
-  position: absolute;
-  margin: 10% 0 0 5%;
-  color: green;
-  animation: fadeIn 3s linear infinite alternate;
+  color: brown;
+  text-shadow: 0 0 3px rgb(100, 14, 14);
   z-index: 3;
 }
+
+.discussion-icon { position: absolute; margin: 10% 0 0 5%; color: firebrick; z-index: 3; }
 
 .login-container, .register-container { display: flex; }
 
@@ -434,7 +428,15 @@
 
 .reply-box { display: flex; width: 85%; margin-left: 7.5%; padding: 40px 0 50px 0; }
 
-input, textarea { text-align: left; text-indent: 1px; width: 90%; color: black; outline: none; }
+input, textarea { 
+  text-align: left; 
+  text-indent: 5px; 
+  width: 90%; 
+  color: black; border: 1px solid rgb(197, 197, 197); 
+  border-radius: 3px;
+}
+
+input:focus { outline-color: green; }
 
 .Dropzone:hover, .category-li:hover, button:hover { opacity: 0.5; }
 
