@@ -12,10 +12,7 @@
   text-align: center;
 }
 
-.App {
-  min-height: 700px;
-  background: radial-gradient(white, rgb(220, 220, 255));
-}
+.App { min-height: 700px }
 
 .nav-bar {
   display: flex;
