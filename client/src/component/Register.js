@@ -69,24 +69,24 @@ export default function Register() {
     }
 
     return (
-        <div className="register-container">
-        <form className="register-form" onSubmit={handleSubmit}>
-            <div className='register-label'>Registeration</div>
-            <div className='error-msg'
+        <div id="register-container">
+        <form id="register-form" onSubmit={handleSubmit}>
+            <div id='register-label'>Registeration</div>
+            <div id='error-msg'
                 style={{
                     color: error ? 'red' : 'goldenrod', 
                     display: message ? '' : 'none',
                     marginBottom: '20px', 
                     fontSize: '16px'
                 }}>{message}</div>
-                <div className='image-section'>
-                    <img src={url ? url : defaultURL} className='preview' alt=""/>
-                    <div className='image-select'>    
+                <div id='image-section'>
+                    <img src={url ? url : defaultURL} id='preview' alt=""/>
+                    <div id='image-select'>    
                         <MyDropzone getFiles={getFiles}/>
                         <input type="file" id="file" accept='image/*' onChange={previewFile}/>
                     </div>
                 </div>
-                <div className='input-section'>
+                <div id='input-section'>
                     <input style={{marginBottom: '20px', height: '50px'}} 
                         name="username"
                         value={username} 
@@ -100,8 +100,8 @@ export default function Register() {
                         placeholder="Enter password"
                         onChange={handleChange} 
                     ></input>
-                    <Link to='/login' style={{marginBottom: '100px', fontSize: '20px', color: 'blue'}}>Login</Link>
-                    <button type="submit" className="submit-btn" style={{height: '75px', background: 'navy'}}>REGISTER</button>
+                    <Link to='/login' style={{margin: '50px 0', fontSize: '20px', color: 'navy'}}>Login</Link>
+                    <button type="submit" id="submit-btn">REGISTER</button>
                 </div>
             </form>
         </div>

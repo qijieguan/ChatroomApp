@@ -65,7 +65,7 @@ export default function Login() {
 
     const openModal = () => {
         setModal(true);
-        document.getElementsByClassName('login-form')[0].style.zIndex = 0;
+        document.getElementById('login-form').style.zIndex = 0;
     }
 
     const closeModal = () => {
@@ -96,10 +96,10 @@ export default function Login() {
     }
 
     return (
-        <div className="home login-container">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <label className='login-label'>Login</label>
-                <div className='error-msg'
+        <div id="login-container">
+            <form id="login-form" onSubmit={handleSubmit}>
+                <label id='login-label'>Login</label>
+                <div id='error-msg'
                     style={{
                         color: error ? 'red' : 'goldenrod', 
                         display: message ? '' : 'none',
@@ -107,26 +107,27 @@ export default function Login() {
                         fontSize: '16px',
                     }}
                 >{message}</div>
-                <input name="username" style={{marginBottom: '10px', height: '40px'}} 
+                <input name="username" style={{marginBottom: '10px', height: '50px'}} 
                     value={username} 
                     placeholder="Enter username"
                     onChange={handleChange}
                 ></input>
-                <input name="password" type="password" style={{marginBottom: '10px', height: '40px'}} 
+                <input name="password" type="password" style={{marginBottom: '10px', height: '50px'}} 
                     value={password}
                     placeholder="Enter password"
                     onChange={handleChange} 
                 ></input>
                 
                 <Link to='/register' style={{color: 'blue', fontSize: '16px'}}>Register</Link>
-                <button type="submit" className="submit-btn" style={{background: 'yellowgreen'}}>LOGIN</button>
+                <button type="submit" id="submit-btn" 
+                    style={{ height: '40px', background: 'yellowgreen'}}>LOGIN</button>
             </form>      
             <Modal isOpen={modal} style={modalStyles}>
-                <AiFillCloseSquare className="close-button" style={{alignSelf: 'flex-end', color: 'red'}}
+                <AiFillCloseSquare id="close-button" style={{alignSelf: 'flex-end', color: 'red'}}
                     onClick={closeModal}
                     size={24}
                 />
-                <button className="authenticate-btn" onClick={userAuthentication}>Click to Authenticate</button> 
+                <button id="authenticate-btn" onClick={userAuthentication}>Click to Authenticate</button> 
             </Modal>
         </div>
     );
