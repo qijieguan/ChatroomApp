@@ -13,24 +13,18 @@ const Comment = ({ comment, topicID }) => {
         axios.post('/api/rate/like', {
             userID: sessionStorage.getItem("userID"),
             commentID: comment.id
-        }).then((response) => {
-            setLikes(response.data.likes);
-        });
+        }).then((response) => { setLikes(response.data.likes); });
     };
 
     const updateDislikes = () => {
         axios.post('/api/rate/dislike', {
             userID: sessionStorage.getItem("userID"),
             commentID: comment.id
-        }).then((response) => {
-            setDislikes(response.data.dislikes);
-        });
+        }).then((response) => { setDislikes(response.data.dislikes); });
     };
 
     const handleDelete = () => {
-        axios.post('/api/comment/delete', {
-            commentID: comment.id
-        });
+        axios.post('/api/comment/delete', { commentID: comment.id });
         document.getElementById(comment.id).remove();
     };
 

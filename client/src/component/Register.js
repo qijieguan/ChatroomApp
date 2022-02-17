@@ -23,10 +23,7 @@ export default function Register() {
     const readFiles = (files) => {
         if (!files) {return}
         const reader = new FileReader();
-        reader.addEventListener("load", () => {
-            setURL(reader.result);
-            setFiles(files)
-        }, false);
+        reader.addEventListener("load", () => { setURL(reader.result); setFiles(files) }, false);
         reader.readAsDataURL(files[0]); 
     }
 
@@ -61,7 +58,6 @@ export default function Register() {
             setError(true);
             return;
         }
-
         uploadImage();
         setUsername("");
         setPassword("");
@@ -100,7 +96,7 @@ export default function Register() {
                         placeholder="Enter password"
                         onChange={handleChange} 
                     ></input>
-                    <Link to='/login' id="login-link">Login</Link>
+                    <Link to='/login' id="login-link">Sign In</Link>
                     <button type="submit" id="submit-btn">REGISTER</button>
                 </div>
             </form>

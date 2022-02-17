@@ -33,25 +33,33 @@
 .nav-btn:hover { color: green; background: white; }
 
 #home {
-  position: relative;
-  min-height: 700px;
+  height: 700px;
+  width: 100%;
+}
+
+#intro-left {
+  position: absolute;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 30%;
+  z-index: 3;
+  animation: slideIn 0.4s linear;
+}
+
+#intro-right {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 70%;
   background: url("https://cdn.pixabay.com/photo/2014/11/29/19/21/social-media-550766_960_720.jpg");
   background-size: auto;
   background-position: right top;
   background-repeat: no-repeat;
 }
 
-#intro {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 700px;
-  width: 475px;
-  z-index: 3;
-  animation: slideIn 0.4s linear;
-}
-
-#intro-content { margin-bottom: 125px; font-size: 50px; color: black; text-shadow: 0 0 3px grey; }
+#intro-content { margin-bottom: 125px; font-size: 50px; text-shadow: 0 0 3px grey; }
 
 #overlay {
   position: absolute;
@@ -67,7 +75,8 @@
   100% { transform: translateX(0); }
 }
 
-#intro-content span { display: block; color: limegreen; font-size: 16px; }
+#intro-content > span { display: block; color: brown; font-size: 16px; }
+#intro-content > span > span { font-size: 16px; color: navy; }
 
 .nav-panel {
   position: absolute;
@@ -120,7 +129,7 @@
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: 425px;
   width: 600px;
   font-weight: bolder;
   background: white;
@@ -142,13 +151,21 @@
   border-radius: 10px 10px 0 0;
 }
 
-#register-link, #login-link { font-size: 16px; width: 100px; border: 2px solid transparent; }
+#register-link, #login-link {
+  align-self: flex-start;
+  justify-self: unset;
+  margin-left: 10%;
+  padding-right: 50px;
+  font-size: 16px; 
+  color: blue;
+  border: 2px solid transparent; 
+}
 
-#login-link { margin: 50px 0; font-size: 20px; color: navy; }
+#login-link { margin: 60px 0 70px 10% ; font-size: 20px; }
 
-#register-link:hover, #login-link:hover { border-bottom: 2px solid navy;}
+#register-link:hover, #login-link:hover { border-bottom: 2px solid blue;}
 
-#login-form button { margin: auto 0 20px 0; height: 40px; background: yellowgreen; }
+#login-form button { margin: auto 0 30px 0; height: 40px; background: yellowgreen; }
 
 #authenticate-btn {
   color: white;
@@ -199,7 +216,7 @@
   border: 3px dashed forestgreen;
 }
 
-#input-section { display: flex; flex-direction: column; height: 550px; background: rgb(216, 255, 216); }
+#input-section { display: flex; flex-direction: column; height: 550px;  background: rgb(216, 255, 216); }
 
 #input-section input, #input-section button { font-size: 16px; width: 80%; }
 
@@ -490,7 +507,7 @@ input, textarea {
   text-indent: 5px; 
   width: 80%; 
   color: black; 
-  border: 1px solid rgb(197, 197, 197); 
+  border: 1px solid rgb(209, 209, 209); 
   border-radius: 3px;
 }
 

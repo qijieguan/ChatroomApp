@@ -52,10 +52,8 @@ export default function Login() {
             password: password  
         }).then((response) => {
             if (response.data.error) {setError(true);}
-            else {
-                openModal();
-                setToken(response.data.token);
-            }
+            else { openModal(); setToken(response.data.token); }
+
             setUID(response.data.userID);
             setURL(response.data.url);
             setMessage(response.data.message);
@@ -68,11 +66,7 @@ export default function Login() {
         document.getElementById('login-form').style.zIndex = 0;
     }
 
-    const closeModal = () => {
-        setMessage("");
-        setModal(false);
-        setToken("");
-    };
+    const closeModal = () => { setMessage(""); setModal(false); setToken(""); };
 
     const userAuthentication = () => {
         axios.get('/api/auth', {
@@ -84,9 +78,8 @@ export default function Login() {
                 sessionStorage.setItem("userID", id);
                 sessionStorage.setItem("url", url);
                 setMessage(response.data.message);
-                axios.post('/api/load', {
-                    userID: id,
-                }).then((response) => {
+                axios.post('/api/load', { userID: id,})
+                .then((response) => {
                     if (response.data) { sessionStorage.setItem("myRooms", JSON.stringify(response.data)); }
                     window.location.href="/dashboard";
                 });
@@ -107,18 +100,17 @@ export default function Login() {
                         fontSize: '16px',
                     }}
                 >{message}</div>
-                <input name="username" style={{marginBottom: '20px', height: '50px'}} 
+                <input name="username" style={{marginBottom: '25px', height: '50px'}} 
                     value={username} 
                     placeholder="Enter username"
                     onChange={handleChange}
                 ></input>
-                <input name="password" type="password" style={{marginBottom: '20px', height: '50px'}} 
+                <input name="password" type="password" style={{marginBottom: '30px', height: '50px'}} 
                     value={password}
                     placeholder="Enter password"
                     onChange={handleChange} 
                 ></input>
-                
-                <Link to='/register' id="register-link">Register</Link>
+                <Link to='/register' id="register-link">Create New Account</Link>
                 <button type="submit" id="submit-btn">SIGN IN</button>
             </form>      
             <Modal isOpen={modal} style={modalStyles}>

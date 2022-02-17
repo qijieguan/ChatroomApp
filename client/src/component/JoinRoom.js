@@ -37,8 +37,8 @@ export default function Join() {
 
     return(
         <div className="room-container">
-            {RoomList.length > 0 ? RoomList.map(room => 
-                <Room room={room} key={room.id} joinRoom={joinRoom} />)
+            {RoomList.length > 0 ? 
+                RoomList.map(room => <Room room={room} key={room.id} joinRoom={joinRoom} />)
             :
                 <div style={{marginTop: '10%', fontSize: '30px', textAlign: 'center'}}>No classrooms open currently</div>    
             }

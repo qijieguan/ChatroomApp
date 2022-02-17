@@ -8,9 +8,8 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (sessionStorage.getItem("myRooms")) {
-            axios.post('/api/load', {
-                userID: sessionStorage.getItem("userID")
-            }).then((response) => {
+            axios.post('/api/load', { userID: sessionStorage.getItem("userID") })
+            .then((response) => {
                 if (response.data) {
                     sessionStorage.setItem("myRooms", JSON.stringify(response.data));
                     setRooms(response.data);

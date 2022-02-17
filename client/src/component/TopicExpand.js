@@ -10,11 +10,8 @@ const Expand = (props) => {
     const [update, setUpdate] = useState(false);
 
     useEffect (() => {
-        axios.post('/api/load_comment', {
-            topic_id: props.match.params.id
-        }).then((response) => {
-            if (response.data) {setCommentList(response.data);}
-        });
+        axios.post('/api/load_comment', { topic_id: props.match.params.id })
+        .then((response) => { if (response.data) {setCommentList(response.data);} });
     }, [props.match.params.id, update]);
 
     const handleChange = event => {setComment(event.target.value);}
@@ -40,9 +37,10 @@ const Expand = (props) => {
             </div>
             <div className="comment-label">COMMENTS</div>
             <div className="comment-list">
-                {commentList.length > 0 ? commentList.map(comment =>
-                    <Comment key={comment.id} comment={comment} topicID={props.match.params.id}/>
-                )
+                {commentList.length > 0 ? 
+                    commentList.map(comment =>
+                        <Comment key={comment.id} comment={comment} topicID={props.match.params.id}/>
+                    )
                     :
                     <div style={{margin: '50px 0'}}>There are no comments on this topic!</div>
                 } 

@@ -12,10 +12,8 @@ export default function Create () {
 
     const handleSubmit = event => {
         event.preventDefault();
-        if (!subject) {
-            console.log("Missing input!")
-            return;
-        }
+        if (!subject) { return; }
+        
         axios.post('/api/create', {
             host: sessionStorage.getItem('user'),
             subject: subject,
