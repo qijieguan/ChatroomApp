@@ -1,10 +1,13 @@
 export default function Home() {
     return (
         <div id="home">
-            <p id="intro">
-                Welcome To My Q & A Service!
-                <span style={{display: 'block', fontSize: '30px'}}>You Can Publish Your Topics Here</span> 
-            </p>
+            <div id="intro">
+                <span id="intro-content">
+                    Knowledge And Solutions
+                    <span>Publish And Share Ideas To Solve Problems Together</span> 
+                </span>
+                <div id="overlay"/>
+            </div>
         </div>
     );
 };

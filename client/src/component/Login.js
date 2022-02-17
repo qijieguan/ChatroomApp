@@ -98,7 +98,7 @@ export default function Login() {
     return (
         <div id="login-container">
             <form id="login-form" onSubmit={handleSubmit}>
-                <label id='login-label'>Login</label>
+                <div id='login-label'>Enter Your Credentials</div>
                 <div id='error-msg'
                     style={{
                         color: error ? 'red' : 'goldenrod', 
@@ -107,20 +107,19 @@ export default function Login() {
                         fontSize: '16px',
                     }}
                 >{message}</div>
-                <input name="username" style={{marginBottom: '10px', height: '50px'}} 
+                <input name="username" style={{marginBottom: '20px', height: '50px'}} 
                     value={username} 
                     placeholder="Enter username"
                     onChange={handleChange}
                 ></input>
-                <input name="password" type="password" style={{marginBottom: '10px', height: '50px'}} 
+                <input name="password" type="password" style={{marginBottom: '20px', height: '50px'}} 
                     value={password}
                     placeholder="Enter password"
                     onChange={handleChange} 
                 ></input>
                 
-                <Link to='/register' style={{color: 'blue', fontSize: '16px'}}>Register</Link>
-                <button type="submit" id="submit-btn" 
-                    style={{ height: '40px', background: 'yellowgreen'}}>LOGIN</button>
+                <Link to='/register' id="register-link">Register</Link>
+                <button type="submit" id="submit-btn">SIGN IN</button>
             </form>      
             <Modal isOpen={modal} style={modalStyles}>
                 <AiFillCloseSquare id="close-button" style={{alignSelf: 'flex-end', color: 'red'}}

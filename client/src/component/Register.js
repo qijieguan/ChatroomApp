@@ -100,7 +100,7 @@ export default function Register() {
                         placeholder="Enter password"
                         onChange={handleChange} 
                     ></input>
-                    <Link to='/login' style={{margin: '50px 0', fontSize: '20px', color: 'navy'}}>Login</Link>
+                    <Link to='/login' id="login-link">Login</Link>
                     <button type="submit" id="submit-btn">REGISTER</button>
                 </div>
             </form>
